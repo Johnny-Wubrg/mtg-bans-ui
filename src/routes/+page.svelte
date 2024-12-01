@@ -4,7 +4,6 @@ import SpecialCredits from '../components/SpecialCredits.svelte';
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <section>

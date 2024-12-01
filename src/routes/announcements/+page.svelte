@@ -3,6 +3,7 @@
 	import type { PageData } from './$types';
 	import FormattedDate from '../../components/FormattedDate.svelte';
 	import SpecialCredits from '../../components/SpecialCredits.svelte';
+	import CardLink from '../../components/CardLink.svelte';
 
 	interface Props {
 		data: PageData;
@@ -15,6 +16,10 @@
 	const { data }: Props = $props();
 	const { announcements }: Data = data;
 </script>
+
+<svelte:head>
+	<title>Announcements Timeline</title>
+</svelte:head>
 
 <h1>MTG "Complete" Banned and Restricted Timeline</h1>
 
@@ -63,7 +68,7 @@
 						<ul>
 							{#each change.cards as card}
 								<li>
-									<a href={card.scryfallUri}>{card.name}</a>
+									<CardLink {card} />
 								</li>
 							{/each}
 						</ul>

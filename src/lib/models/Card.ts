@@ -4,3 +4,9 @@ export interface Card {
     scryfallImageUri: string;
     scryfallUri: string;
 }
+
+export interface FormatBans {
+    format: string;
+    banned: Card[];
+    restricted: Card[];
+}
