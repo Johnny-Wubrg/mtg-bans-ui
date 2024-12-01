@@ -1,20 +1,19 @@
 <script lang="ts">
 	import '../app.css';
+	import AppHeader from '../components/layout/AppHeader.svelte';
+	import AppFooter from '../components/layout/AppFooter.svelte';
 
 	let { children } = $props();
 </script>
 
 <div class="app">
+	<AppHeader />
 
 	<main>
 		{@render children()}
 	</main>
-	
-	<footer>
-		<p>
-			A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved.
-		</p>
-	</footer>
+
+	<AppFooter />
 </div>
 
 <style>

@@ -1,7 +1,3 @@
-<script lang="ts">
-import SpecialCredits from '../components/SpecialCredits.svelte';
-</script>
-
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
@@ -10,12 +6,8 @@ import SpecialCredits from '../components/SpecialCredits.svelte';
 	<h1>Hello world!</h1>
 	<p>
 		You have stumbled upon an ongoing project to document, catalog, and eventually visualize the entire timeline of
-		banned and restricted <b>Magic: the Gathering™</b> cards. For now, all we have is <a href="/announcements">part of
-		the timeline</a>.
+		banned and restricted <b>Magic: the Gathering™</b> cards. Feel free to poke around.
 	</p>
-
-	<h3>Special Thanks</h3>
-	<SpecialCredits />
 </section>
 
 <style>
