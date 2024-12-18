@@ -33,50 +33,58 @@
 
 <p>
 	A lot of the of early history was unclear, with no real sources, so there may be some mistakes, especially on the
-	timing. Note that specifically for the Commander format, "Restricted" means "Banned as Commander".
+	timing. Note that specifically for the Commander format, "Restricted" means "Banned as Commander". In all formats,
+	"Unbanned" means removed from the B&R list, regardless of whether it was banned or restricted.
 </p>
 
 {#each announcements as announcement}
-	<article>
-		<h2>{announcement.summary}</h2>
-		<p>
-			Effective:
-			<FormattedDate date={announcement.dateEffective} />
-		</p>
+	<article id={`announcement_${announcement.id}`}>
+		<details>
+			<summary>
+				{announcement.summary} | Effective Date:
+				<FormattedDate date={announcement.dateEffective} />
+			</summary>
 
-		{#if announcement.sources.length}
-			<h3>Sources</h3>
+			{#if announcement.sources.length}
+				<h3>Sources</h3>
 
-			<ul>
-				{#each announcement.sources as src}
-					<li>
-						<a href={src}>{src}</a>
-					</li>
+				<ul>
+					{#each announcement.sources as src}
+						<li>
+							<a href={src}>{src}</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
+
+			{#if announcement.changesets.length}
+				<h3>Changes</h3>
+
+				{#each announcement.changesets as changeset}
+					<h4>{changeset.format}</h4>
+
+					<ul>
+						{#each changeset.changes as change}
+							<li>
+								{change.type}
+								<ul>
+									{#each change.cards as card}
+										<li>
+											<CardLink {card} />
+										</li>
+									{/each}
+								</ul>
+							</li>
+						{/each}
+					</ul>
 				{/each}
-			</ul>
-		{/if}
-
-		<h3>Changes</h3>
-
-		{#each announcement.changesets as changeset}
-			<h4>{changeset.format}</h4>
-
-			<ul>
-				{#each changeset.changes as change}
-					<li>
-						{change.type}
-						<ul>
-							{#each change.cards as card}
-								<li>
-									<CardLink {card} />
-								</li>
-							{/each}
-						</ul>
-					</li>
-				{/each}
-			</ul>
-		{/each}
+			{/if}
+		</details>
 	</article>
-
-	<hr>
 {/each}
+
+<style>
+    summary {
+        font-size: 1.2em;
+    }
+</style>

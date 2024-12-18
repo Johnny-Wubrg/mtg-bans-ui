@@ -2,6 +2,7 @@ import type { Card } from '$lib/models/Card';
 
 export interface Announcement {
 	id: number;
+	dateAnnounced: string;
 	dateEffective: string;
 	summary: string;
 	sources: string[];

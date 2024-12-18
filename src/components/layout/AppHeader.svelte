@@ -7,6 +7,7 @@
 	const navlinks: Navlink[] = [
 		{ href: '/announcements', label: 'Announcements' },
 		{ href: '/banlist', label: 'Bans' },
+		{ href: '/unresolved', label: 'Help Wanted' },
 		{ href: '/contact', label: 'Contact' }
 	];
 </script>
