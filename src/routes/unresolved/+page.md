@@ -54,6 +54,7 @@ additional information on the announcements listed below, please [reach out](/co
       on [DreamWizards](https://web.archive.org/web/20051217105153/http://www.dreamwizards.com:80/edh.html). It would
       have been unbanned in Vintage during this
       time ([10/1/1999](/announcements#announcement_30) - [9/20/2007](/announcements#announcement_56)).
+- Some categories of cards are blanket-banned, such as ante cards and Conspiracy cards. Future releases of such cards may have been missed after their initial banning. Some examples I came across are when new antes cards were released after they were banned in 1994 and when Conspiracy: Take the Crown introduced a new batch of Conpiracy cards. There may be other cases I'm missing.
 
 ## Missing Formats
 
