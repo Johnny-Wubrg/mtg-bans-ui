@@ -24,7 +24,15 @@ additional information on the announcements listed below, please [reach out](/co
     - [MTR Update 7/1/1998](/announcements#announcement_24)
     - [MTR Update 7/1/1999](/announcements#announcement_28)
     - [MTR Update 8/1/1999](/announcements#announcement_29)
-- Most of the commander bannings are sourced
+- Several B&R Announcements from 2017 to 2019 are missing from the official Magic website, and their respective Wayback Machine entires do not capture the main body of the articles. Third-party sources have been used in their place.
+  - [January 9, 2017 Banned and Restricted Announcement](/announcements#announcement_101)
+  - [Addendum to April 24, 2017, Banned and Restricted Announcement](/announcements#announcement_104)
+  - [June 13, 2017 Banned and Restricted Announcement](/announcements#announcement_105)
+  - [August 28, 2017 Banned and Restricted Announcement](/announcements#announcement_106)
+  - [January 15, 2018 Banned and Restricted Announcement](/announcements#announcement_107)
+  - [February 12, 2018 Banned and Restricted Announcement](/announcements#announcement_108)
+  - [July 8, 2019, Banned and Restricted Announcement](/announcements#announcement_114)
+- Most of the early commander bannings are sourced
   from [Mewens' thread on the MTG Salvation Forums](https://www.mtgsalvation.com/forums/the-game/commander-edh/204244-edh-banlist-timeline).
   However, some of the sources listed in this thread no longer reflect the information provided.
     - The thread cites an update to the DreamWizards EDH rules
@@ -53,6 +61,8 @@ additional information on the announcements listed below, please [reach out](/co
   appreciated.
 - Block constructed is not supported due to technical limitations. There are currently no plans on supporting this
   format.
+- "Joke" (e.g. silver-bordered and acorn-stamped cards) are not included in any capacity, including when they were legal in Commander from December 1, 2017 to January 15, 2018.
+  - This excludes cards from Unfinity without the acorn stamp.
 - Digital-only formats, including on MTG Arena are not supported.
     - Pauper is an exception; it was eventually sanctioned in paper, but the banlist for the format is maintained from
       its time as an MTGO-exclusive format.
