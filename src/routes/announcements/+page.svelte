@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 	import FormattedDate from '../../components/FormattedDate.svelte';
 	import SpecialCredits from '../../components/SpecialCredits.svelte';
-	import CardLink from '../../components/CardLink.svelte';
+	import CardList from '../../components/cards/CardList.svelte';
 
 	interface Props {
 		data: PageData;
@@ -67,13 +67,7 @@
 						{#each changeset.changes as change}
 							<li>
 								{change.type}
-								<ul>
-									{#each change.cards as card}
-										<li>
-											<CardLink {card} />
-										</li>
-									{/each}
-								</ul>
+								<CardList cards={change.cards} />
 							</li>
 						{/each}
 					</ul>

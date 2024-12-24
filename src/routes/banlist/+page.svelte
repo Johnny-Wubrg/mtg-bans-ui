@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { FormatBans } from '$lib/models/Card';
-	import CardLink from '../../components/CardLink.svelte';
+	import CardList from '../../components/cards/CardList.svelte';
 
 	interface Props {
 		data: PageData;
@@ -23,25 +23,11 @@
 	<h2>{format.format}</h2>
 	{#if format.banned.length}
 		<h3>Banned</h3>
-
-		<ul>
-			{#each format.banned as card}
-				<li>
-					<CardLink {card} />
-				</li>
-			{/each}
-		</ul>
+		<CardList cards={format.banned} classified />
 	{/if}
 	{#if format.restricted.length}
 		<h3>Restricted</h3>
-
-		<ul>
-			{#each format.restricted as card}
-				<li>
-					<CardLink {card} />
-				</li>
-			{/each}
-		</ul>
+		<CardList cards={format.restricted} classified />
 	{/if}
 {/each}
 

@@ -3,6 +3,12 @@ export interface Card {
     name: string;
     scryfallImageUri: string;
     scryfallUri: string;
+    classification: Classification;
+}
+
+export interface Classification {
+    id: number;
+    summary: string;
 }
 
 export interface FormatBans {
