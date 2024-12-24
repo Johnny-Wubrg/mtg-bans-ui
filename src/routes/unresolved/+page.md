@@ -24,7 +24,7 @@ additional information on the announcements listed below, please [reach out](/co
     - [MTR Update 7/1/1998](/announcements#announcement_24)
     - [MTR Update 7/1/1999](/announcements#announcement_28)
     - [MTR Update 8/1/1999](/announcements#announcement_29)
-- Several B&R Announcements from 2017 to 2019 are missing from the official Magic website, and their respective Wayback Machine entires do not capture the main body of the articles. Third-party sources have been used in their place.
+- Several B&R Announcements from 2017 to 2019 are missing from the official Magic website, and their respective Wayback Machine entries do not capture the main body of the articles. Third-party sources have been used in their place.
   - [January 9, 2017 Banned and Restricted Announcement](/announcements#announcement_101)
   - [Addendum to April 24, 2017, Banned and Restricted Announcement](/announcements#announcement_104)
   - [June 13, 2017 Banned and Restricted Announcement](/announcements#announcement_105)
@@ -54,6 +54,7 @@ additional information on the announcements listed below, please [reach out](/co
       on [DreamWizards](https://web.archive.org/web/20051217105153/http://www.dreamwizards.com:80/edh.html). It would
       have been unbanned in Vintage during this
       time ([10/1/1999](/announcements#announcement_30) - [9/20/2007](/announcements#announcement_56)).
+- The [Wikia Banlist Timeline](https://mtg.fandom.com/wiki/Banned_and_restricted_cards/Timeline#October_3) lists Hymn to Tourach as being banned in Legacy, but I'm unable to confirm this. There's no record of Hymn ever getting unbanned and as of December 2024, and it is not currently banned, so I am assuming this was a mistake.
 - Some categories of cards are blanket-banned, such as ante cards and Conspiracy cards. Future releases of such cards may have been missed after their initial banning. Some examples I came across are when new antes cards were released after they were banned in 1994 and when Conspiracy: Take the Crown introduced a new batch of Conpiracy cards. There may be other cases I'm missing.
 
 ## Missing Formats
