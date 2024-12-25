@@ -56,6 +56,7 @@ additional information on the announcements listed below, please [reach out](/co
       time ([10/1/1999](/announcements#announcement_30) - [9/20/2007](/announcements#announcement_56)).
 - The [Wikia Banlist Timeline](https://mtg.fandom.com/wiki/Banned_and_restricted_cards/Timeline#October_3) lists Hymn to Tourach as being banned in Legacy, but I'm unable to confirm this. There's no record of Hymn ever getting unbanned and as of December 2024, and it is not currently banned, so I am assuming this was a mistake.
 - Some categories of cards are blanket-banned, such as ante cards and Conspiracy cards. Future releases of such cards may have been missed after their initial banning. Some examples I came across are when new antes cards were released after they were banned in 1994 and when Conspiracy: Take the Crown introduced a new batch of Conpiracy cards. There may be other cases I'm missing.
+- Mana Crypt's status within Extended is somewhat unclear. It was explicitly banned at the format's inception, but was never printed in a set that was legal in the format and thus never "rotated". [As of 2008](https://web.archive.org/web/20081106201424/http://www.wizards.com/Magic/TCG/Resources.aspx?x=judge/resources/sfrextended), it was not explicitly listed in the format's banlist.
 
 ## Missing Formats
 
