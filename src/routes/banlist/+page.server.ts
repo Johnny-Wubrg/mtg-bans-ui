@@ -1,8 +1,8 @@
 import type { PageServerLoad } from './$types';
-import { getAnnouncements } from '$lib/api/announcements';
 import { getBanlist } from '$lib/api/cards';
 
-export const load = (async () => {
-	const bans = await getBanlist('');
-	return { bans };
+export const load = (async ({ url }) => {
+	const date = url.searchParams.get('date');
+	const bans = await getBanlist(date ?? '');
+	return { date, bans };
 }) satisfies PageServerLoad;

@@ -1,15 +1,11 @@
 <script lang="ts">
+	import { formatDate } from '$lib/utils/date';
+
 	interface Props {
 		date: string;
 	}
 
-	const { date } = $props();
-
-	const parsedDate = new Date(date);
-	const convertedDate = new Date(parsedDate.setMinutes(
-		parsedDate.getMinutes() + parsedDate.getTimezoneOffset()
-	));
-	const formattedDate = convertedDate.toLocaleDateString();
+	const { date }: Props = $props();
 </script>
 
-<time>{formattedDate}</time>
+<time>{formatDate(date)}</time>
