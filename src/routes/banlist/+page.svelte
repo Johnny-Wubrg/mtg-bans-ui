@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { FormatBans } from '$lib/models/Card';
-	import CardList from '../../components/cards/CardList.svelte';
-	import { invalidateAll } from '$app/navigation';
-	import { formatDate } from '$lib/utils/date';
+	import { convertDate, formatDate, formatIsoDate } from '$lib/utils/date';
+	import Format from './components/Format.svelte';
 
 	interface Props {
 		data: PageData;
@@ -18,6 +17,8 @@
 	const { date, bans }: Data = data;
 
 	const title = date ? `Historical Banlist - ${formatDate(date)}` : 'Current Banlist';
+	const now = new Date();
+	const isFuture = date && convertDate(new Date(date)) > now;
 </script>
 
 <svelte:head>
@@ -26,8 +27,9 @@
 
 <h1>{title}</h1>
 
+
 <form action="/banlist" method="GET" data-sveltekit-reload>
-	<input type="date" name="date" value={date} />
+	<input type="date" name="date" value={date} min="1993-08-05" max={formatIsoDate(now)} />
 	<button>Time Travel!</button>
 	{#if date}
 		<button
@@ -35,27 +37,18 @@
 			form="present"
 			onclick={() => {
 				window.location.href = '/banlist';
-			}}>Return to Present</button
+			}}>Return to Present
+		</button
 		>
 	{/if}
 </form>
 
-{#each bans as format}
-	{@const hasBan = format.banned?.length || format.restricted?.length}
-	<h2>{format.format}</h2>
-	{#if format.banned.length}
-		<h3>Banned</h3>
-		<CardList cards={format.banned} classified />
-	{/if}
-	{#if format.restricted.length}
-		<h3>Restricted</h3>
-		<CardList cards={format.restricted} classified />
-	{/if}
-	{#if !hasBan}
-		<p>No cards are currently banned or restricted.</p>
-	{/if}
-{/each}
-
-{#if !bans.length}
-	<h2>You've gone too far back.</h2>
+{#if isFuture}
+	<h2>Sorry, our banlist prediction AI is currently out of order.</h2>
+{:else if !bans.length}
+	<h2>You've gone too far back. This time period predates Magic: the Gathering.</h2>
+{:else}
+	{#each bans as format}
+		<Format {format} />
+	{/each}
 {/if}
