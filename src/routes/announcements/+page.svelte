@@ -73,6 +73,10 @@
 					</ul>
 				{/each}
 			{/if}
+			
+			<p>
+				<a href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
+			</p>
 		</details>
 	</article>
 {/each}
