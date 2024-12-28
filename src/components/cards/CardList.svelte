@@ -13,7 +13,7 @@
 	}
 
 	const { cards, classified = false }: Props = $props();
-	const classifiedCards = cards.reduce<Record<string, Stuff>>((a, c) => {
+	const classifiedCards = !classified ? {} : cards.reduce<Record<string, Stuff>>((a, c) => {
 		if (!c.classification) return a;
 
 		a[c.classification.id] = a[c.classification.id] ?? {
