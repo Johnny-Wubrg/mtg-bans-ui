@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Wordmark from './Wordmark.svelte';
+
 	interface Navlink {
 		href: string;
 		label: string;
@@ -13,10 +15,18 @@
 </script>
 
 <header>
+	<a href="/" class="brand-link">
+		<Wordmark />
+	</a>
 	<nav>
-		Main Nav: <a href="/">Home</a>
 		{#each navlinks as navlink}
-			| <a href={navlink.href}>{navlink.label}</a>&nbsp;
+			<a href={navlink.href}>{navlink.label}</a>&nbsp;
 		{/each}
 	</nav>
 </header>
+
+<style>
+	.brand-link {
+      text-decoration: none;
+	}
+</style>

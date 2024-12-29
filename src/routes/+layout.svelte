@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import '../style/main.scss';
 	import AppHeader from '../components/layout/AppHeader.svelte';
 	import AppFooter from '../components/layout/AppFooter.svelte';
 

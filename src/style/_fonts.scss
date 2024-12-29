@@ -1,0 +1,56 @@
+@mixin font-faces {
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino.ttf');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+  }
+
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino Bold.ttf');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 700;
+    font-stretch: normal;
+  }
+
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino Light.ttf');
+    font-display: swap;
+    font-style: normal;
+    font-weight: 200;
+    font-stretch: normal;
+  }
+
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino Italic.ttf');
+    font-display: swap;
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: normal;
+  }
+
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino Bold Italic.ttf');
+    font-display: swap;
+    font-style: italic;
+    font-weight: 700;
+    font-stretch: normal;
+  }
+
+
+  @font-face {
+    font-family: 'Bambino';
+    src: url('/fonts/Bambino/Bambino Light Italic.ttf');
+    font-display: swap;
+    font-style: italic;
+    font-weight: 200;
+    font-stretch: normal;
+  }
+}
