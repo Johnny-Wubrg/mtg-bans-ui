@@ -19,8 +19,6 @@
 <PageTitle>Contact</PageTitle>
 
 <form name="mtg-bans-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-	<input type="hidden" name="form-name" value="mtg-bans-contact" />
-
 	<div class="field">
 		<label for="contact-subject">Subject</label>
 		<select name="subject" id="contact-subject" required>
