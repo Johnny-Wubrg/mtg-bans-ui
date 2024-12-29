@@ -1,4 +1,8 @@
-# Privacy Policy
+<script>
+import PageTitle from '../../components/layout/PageTitle.svelte';
+</script>
+
+<PageTitle>Privacy Policy</PageTitle>
 
 Last Updated: 2024-12-28
 

@@ -1,8 +1,12 @@
+<script>
+import PageTitle from '../../components/layout/PageTitle.svelte';
+</script>
+
 <svelte:head>
 <title>Help Wanted</title>
 </svelte:head>
 
-# Help Wanted
+<PageTitle>Help Wanted</PageTitle>
 
 The data on this website is incomplete! There are a number of bannings that are missing a proper source. If you have any
 additional information on the announcements listed below, please [reach out](/contact).
