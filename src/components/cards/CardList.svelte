@@ -27,7 +27,7 @@
 	
 	const remainingCards = classified ? cards.filter(e => e.classification == null) : cards;
 	
-	const getColumns = (count: number) => count > 20 ? 3 : 1;
+	const getColumns = (count: number) => count > 14 ? 3 : 1;
 </script>
 
 
@@ -36,7 +36,7 @@
 		<li class="collapsed">
 			<details>
 				<summary>{classification.summary} ({cards.length})</summary>
-				<ul class="cards" style="--column-count: {getColumns(remainingCards.length)}">
+				<ul class="cards" style="--column-count: {getColumns(cards.length)}">
 					{#each cards as card}
 						<li>
 							<CardLink {card} />
