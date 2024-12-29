@@ -1,11 +1,11 @@
 <footer class="container">
 	<p>
-		A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved.
+		A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved. | <a href="/privacy">Privacy Policy</a>
 	</p>
 
 	<p>
 		Extra Content:
-		<a href="/announcements">Full Announcements List</a> |
+		<a href="/announcements">Full Announcements Timeline</a> |
 		<a href="/unresolved">How You Can Help</a>
 	</p>
 
