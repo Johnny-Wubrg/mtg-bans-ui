@@ -115,6 +115,18 @@ button, input, select {
 
 button {
   cursor: pointer;
+  background: var(--color-dark-gray);
+  padding: 0.5em 1em;
+  border: none;
+  color: var(--color-white);
+}
+
+select, textarea, input[type="text"], input[type="date"], input[type="email"] {
+  border: 2px solid var(--color-border);
+  padding: 0.5em 1em;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text);
 }
 
 .container {

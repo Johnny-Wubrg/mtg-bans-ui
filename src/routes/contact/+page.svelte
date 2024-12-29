@@ -8,7 +8,7 @@
 	const reasons: Record<string, ReasonDefinition> = {
 		general: { label: 'General Inquiry' },
 		correction: { label: 'Submit a Correction or Citation' },
-		bug: { label: 'Report a Bug' },
+		bug: { label: 'Report a Bug' }
 	};
 </script>
 
@@ -23,7 +23,7 @@
 
 	<div class="field">
 		<label for="contact-subject">Subject</label>
-		<select name="subject" id="contact-subject">
+		<select name="subject" id="contact-subject" required>
 			{#each Object.entries(reasons) as [id, reason]}
 				<option value={id}>{reason.label}</option>
 			{/each}
@@ -32,7 +32,7 @@
 
 	<div class="field">
 		<label for="contact-name">Name</label>
-		<input id="contact-name" name="contact-name" type="text" />
+		<input id="contact-name" name="contact-name" type="text" required />
 	</div>
 
 	<div class="field">
@@ -42,16 +42,32 @@
 
 	<div class="field">
 		<label for="comments">Comments</label>
-		<textarea id="comments"></textarea>
+		<textarea id="comments" required></textarea>
 	</div>
+
+	<button>Submit</button>
 </form>
 
 <style>
     .field {
-        margin: 1em 0;
+        margin: 2em 0;
 
-        label, input, textarea {
+        label {
+            margin-bottom: 0.25em;
+        }
+
+        label, select, input, textarea {
             display: block;
+            width: 100%;
+        }
+
+        option {
+            color: var(--color-black);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 8em;
         }
     }
 </style>

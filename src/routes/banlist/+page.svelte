@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { FormatBans } from '$lib/models/Card';
-	import { convertDate, formatDate, formatIsoDate } from '$lib/utils/date';
+	import { convertDate, formatDate } from '$lib/utils/date';
 	import Format from './components/Format.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import TimeMachine from './components/TimeMachine.svelte';
 
 	interface Props {
 		data: PageData;
@@ -28,21 +29,7 @@
 
 <PageTitle>{title}</PageTitle>
 
-
-<form action="/banlist" method="GET" data-sveltekit-reload>
-	<input type="date" name="date" value={date} min="1993-08-05" max={formatIsoDate(now)} />
-	<button>Time Travel!</button>
-	{#if date}
-		<button
-			type="button"
-			form="present"
-			onclick={() => {
-				window.location.href = '/banlist';
-			}}>Return to Present
-		</button
-		>
-	{/if}
-</form>
+<TimeMachine {date} {now} />
 
 {#if isFuture}
 	<h2>Sorry, our banlist prediction AI is currently out of order.</h2>
