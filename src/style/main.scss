@@ -1,14 +1,9 @@
 @use 'fonts';
+@use '@scissors/media';
 
 @include fonts.font-faces;
 
 :root {
-  --container-width: 90%;
-
-  /* Breakpoints */
-  --breakpoint-sm: 480px;
-  --breakpoint-md: 640px;
-
   /* Colors */
 
   --color-white: #fdfffc;
@@ -60,7 +55,7 @@
   --color-tint: var(--color-purple);
 }
 
-@media (prefers-color-scheme: dark) {
+@include media.dark {
   :root {
     --color-background: var(--color-black);
     --color-highlight: var(--color-black);
@@ -68,6 +63,12 @@
     --color-border: var(--color-gray);
     --color-link: var(--color-white-2);
     --color-tint: var(--color-gray);
+
+    --mtg-white: var(--mtg-white-dark);
+    --mtg-blue: var(--mtg-blue-dark);
+    --mtg-black: var(--mtg-black-dark);
+    --mtg-red: var(--mtg-red-dark);
+    --mtg-green: var(--mtg-green-dark);
   }
 }
 
@@ -82,6 +83,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-primary);
   font-weight: 300;
+  line-height: 1.5;
 }
 
 h1,
@@ -99,9 +101,23 @@ a, a:link {
   color: var(--color-link);
 }
 
-button {
-  cursor: pointer;
+b {
+  font-weight: bold;
+}
+
+button, input, select {
   font-size: inherit;
   font-weight: inherit;
   font-family: inherit;
+  min-width: 0;
+  max-width: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
 }

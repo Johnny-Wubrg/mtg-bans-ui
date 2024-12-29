@@ -3,6 +3,7 @@
 	import type { FormatBans } from '$lib/models/Card';
 	import { convertDate, formatDate, formatIsoDate } from '$lib/utils/date';
 	import Format from './components/Format.svelte';
+	import PageTitle from '../../components/layout/PageTitle.svelte';
 
 	interface Props {
 		data: PageData;
@@ -25,7 +26,7 @@
 	<title>{title}</title>
 </svelte:head>
 
-<h1>{title}</h1>
+<PageTitle>{title}</PageTitle>
 
 
 <form action="/banlist" method="GET" data-sveltekit-reload>

@@ -4,6 +4,7 @@
 	import FormattedDate from '../../components/FormattedDate.svelte';
 	import SpecialCredits from '../../components/SpecialCredits.svelte';
 	import CardList from '../../components/cards/CardList.svelte';
+	import PageTitle from '../../components/layout/PageTitle.svelte';
 
 	interface Props {
 		data: PageData;
@@ -21,7 +22,7 @@
 	<title>Announcements Timeline</title>
 </svelte:head>
 
-<h1>MTG "Complete" Banned and Restricted Timeline</h1>
+<PageTitle>MTG "Complete" Banned and Restricted Timeline</PageTitle>
 
 <p>
 	This is a timeline of every known update to the banned and restricted list of most officially supported constructed
@@ -86,6 +87,5 @@
 
 <style>
     summary {
-        font-size: 1.2em;
     }
 </style>

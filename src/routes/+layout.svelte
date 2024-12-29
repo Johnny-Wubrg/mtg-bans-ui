@@ -9,7 +9,7 @@
 <div class="app">
 	<AppHeader />
 
-	<main>
+	<main class="container">
 		{@render children()}
 	</main>
 

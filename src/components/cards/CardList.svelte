@@ -6,7 +6,7 @@
 		cards: Card[];
 		classified?: boolean;
 	}
-	
+
 	interface Stuff {
 		classification: Classification;
 		cards: Card[];
@@ -24,16 +24,19 @@
 
 		return a;
 	}, {});
+	
 	const remainingCards = classified ? cards.filter(e => e.classification == null) : cards;
+	
+	const getColumns = (count: number) => count > 20 ? 3 : 1;
 </script>
 
 
 <ul>
-	{#each Object.values(classifiedCards) as {classification, cards}}
+	{#each Object.values(classifiedCards) as { classification, cards }}
 		<li class="collapsed">
 			<details>
 				<summary>{classification.summary} ({cards.length})</summary>
-				<ul>
+				<ul class="cards" style="--column-count: {getColumns(remainingCards.length)}">
 					{#each cards as card}
 						<li>
 							<CardLink {card} />
@@ -43,6 +46,9 @@
 			</details>
 		</li>
 	{/each}
+</ul>
+
+<ul class="cards" style="--column-count: {getColumns(remainingCards.length)}">
 	{#each remainingCards as card}
 		<li>
 			<CardLink {card} />
@@ -51,9 +57,14 @@
 </ul>
 
 <style>
-	.collapsed {
-      list-style-type: none;
-      margin-left: -0.875em;
-      padding-left: 0;
-	}
+    .collapsed {
+        list-style-type: none;
+        margin-left: -0.875em;
+        padding-left: 0;
+    }
+
+    .cards {
+        columns: var(--column-count, 1);
+        column-gap: 2em;
+    }
 </style>
