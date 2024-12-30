@@ -24,8 +24,15 @@
 
 
 <style lang="scss">
+	@use '@scissors/breakpoints';
+
   footer {
-    margin-top: 4em;
+    margin: 4em auto 2em;
+		text-align: center;
+
+		@include breakpoints.large {
+			text-align: left;
+		}
 
     p {
       margin: 0.5em 0;

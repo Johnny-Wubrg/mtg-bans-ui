@@ -3,9 +3,9 @@
 	import type { PageData } from './$types';
 	import FormattedDate from '../../components/FormattedDate.svelte';
 	import SpecialCredits from '../../components/SpecialCredits.svelte';
-	import CardList from '../../components/cards/CardList.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import Changeset from './components/Changeset.svelte';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	interface Props {
 		data: PageData;
@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>Announcements Timeline</title>
+	<title>Announcements Timeline | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 
 <PageTitle>MTG "Complete" Banned and Restricted Timeline</PageTitle>
@@ -71,13 +71,8 @@
 			{/if}
 
 			<p>
-				<a href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
+				<a class="button" href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
 			</p>
 		</details>
 	</article>
 {/each}
-
-<style>
-    summary {
-    }
-</style>
