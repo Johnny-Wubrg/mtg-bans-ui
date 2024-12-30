@@ -101,7 +101,7 @@ a, a:link {
   color: var(--color-link);
 }
 
-b {
+b, strong {
   font-weight: bold;
 }
 
@@ -129,13 +129,12 @@ select, textarea, input[type="text"], input[type="date"], input[type="email"] {
   color: var(--color-text);
 }
 
-ul {
+ul, ol {
   padding-left: 1em;
 }
 
-li ul {
+li ul, li ol {
   padding-left: 2em;
-  // margin: 0.5em 0;
 }
 
 .container {

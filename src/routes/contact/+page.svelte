@@ -64,7 +64,7 @@
 	</div>
 
 	<div class="field">
-		<label for="contact-email">Email</label>
+		<label for="contact-email">Email (Optional)</label>
 		<input id="contact-email" name="contact-email" type="email" />
 	</div>
 
