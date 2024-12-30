@@ -113,12 +113,16 @@ button, input, select, textarea {
   max-width: none;
 }
 
-button {
+button, a.button {
   cursor: pointer;
+  display: inline-block;
+  text-align: center;
   background: var(--color-dark-gray);
   padding: 0.5em 1em;
   border: none;
   color: var(--color-white);
+  text-decoration: none;
+  line-height: 1.2;
 }
 
 select, textarea, input[type="text"], input[type="date"], input[type="email"] {

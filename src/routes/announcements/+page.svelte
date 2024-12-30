@@ -80,7 +80,7 @@
 			{/if}
 
 			<p>
-				<a href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
+				<a class="button" href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
 			</p>
 		</details>
 	</article>
