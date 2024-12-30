@@ -27,26 +27,38 @@
 	</nav>
 </header>
 
-<style>
-    header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 1200px;
-        margin: auto;
-        padding: 1em 0;
-    }
+<style lang="scss">
+	@use '@scissors/breakpoints';
 
-    .brand-link {
-        display: block;
-        text-decoration: none;
-    }
-		
-		nav {
-        display: flex;
+	header {
+		padding: 1em;
+		text-align: center;
+		@include breakpoints.large {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 1200px;
+			margin: auto;
+			padding: 1em 0;
 		}
-		
-		.nav-control {
-        padding: 1em;
+	}
+
+	.brand-link {
+		display: block;
+		text-decoration: none;
+		text-align: center;
+	}
+
+	nav {
+		display: flex;
+		justify-content: center;
+
+		@include breakpoints.large {
+			justify-content: start;
 		}
+	}
+
+	.nav-control {
+		padding: 1em;
+	}
 </style>

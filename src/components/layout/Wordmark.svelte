@@ -6,12 +6,19 @@
 </div>
 
 <style lang="scss">
+	@use '@scissors/breakpoints';
+
   .wordmark {
     display: flex;
 		align-items: baseline;
+    justify-content: center;
     font-family: var(--font-primary);
     font-size: 2.5em;
     font-weight: normal;
+
+    @include breakpoints.large {
+      justify-content: start;
+    }
 
     &-component {
       margin: 0;

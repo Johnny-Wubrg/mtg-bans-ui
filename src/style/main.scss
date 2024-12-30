@@ -83,7 +83,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-primary);
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.8;
 }
 
 h1,
@@ -129,7 +129,17 @@ select, textarea, input[type="text"], input[type="date"], input[type="email"] {
   color: var(--color-text);
 }
 
+ul {
+  padding-left: 1em;
+}
+
+li ul {
+  padding-left: 2em;
+  // margin: 0.5em 0;
+}
+
 .container {
   max-width: 1200px;
   margin: auto;
+  padding: 0 1em;
 }
