@@ -7,7 +7,7 @@ export interface Card {
 }
 
 export interface Classification {
-    id: number;
+    displayOrder: number;
     summary: string;
 }
 
