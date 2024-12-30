@@ -5,6 +5,7 @@
 	import Format from './components/Format.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import TimeMachine from './components/TimeMachine.svelte';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	interface Props {
 		data: PageData;
@@ -24,7 +25,11 @@
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+	{#if date}
+		<title>{PUBLIC_APP_NAME} {title}</title>
+	{:else}
+		<title>Magic: the Gathering Banned & Restricted Lists | {PUBLIC_APP_NAME}</title>
+	{/if}
 </svelte:head>
 
 <PageTitle>{title}</PageTitle>

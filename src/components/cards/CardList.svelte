@@ -13,23 +13,24 @@
 	}
 
 	const { cards, classified = false }: Props = $props();
-	const classifiedCards = !classified ? {} : cards.reduce<Record<string, Stuff>>((a, c) => {
-		if (!c.classification) return a;
+	const classifiedCards = !classified
+		? {}
+		: cards.reduce<Record<string, Stuff>>((a, c) => {
+				if (!c.classification) return a;
 
-		a[c.classification.id] = a[c.classification.id] ?? {
-			classification: c.classification,
-			cards: []
-		};
-		a[c.classification.id].cards.push(c);
+				a[c.classification.id] = a[c.classification.id] ?? {
+					classification: c.classification,
+					cards: []
+				};
+				a[c.classification.id].cards.push(c);
 
-		return a;
-	}, {});
-	
-	const remainingCards = classified ? cards.filter(e => e.classification == null) : cards;
-	
-	const getColumns = (count: number) => count > 14 ? 3 : 1;
+				return a;
+			}, {});
+
+	const remainingCards = classified ? cards.filter((e) => e.classification == null) : cards;
+
+	const getColumns = (count: number) => (count > 14 ? 3 : 1);
 </script>
-
 
 <ul>
 	{#each Object.values(classifiedCards) as { classification, cards }}
@@ -56,15 +57,18 @@
 	{/each}
 </ul>
 
-<style>
-    .collapsed {
-        list-style-type: none;
-        margin-left: -0.875em;
-        padding-left: 0;
-    }
+<style lang="scss">
+	@use '@scissors/breakpoints';
+	.collapsed {
+		list-style-type: none;
+		margin-left: -0.875em;
+		padding-left: 0;
+	}
 
-    .cards {
-        columns: var(--column-count, 1);
-        column-gap: 2em;
-    }
+	.cards {
+		@include breakpoints.large {
+			columns: var(--column-count, 1);
+			column-gap: 2em;
+		}
+	}
 </style>
