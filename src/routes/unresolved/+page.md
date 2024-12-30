@@ -1,9 +1,10 @@
 <script>
+import { PUBLIC_APP_NAME } from '$env/static/public';
 import PageTitle from '../../components/layout/PageTitle.svelte';
 </script>
 
 <svelte:head>
-<title>Help Wanted</title>
+<title>How You Can Help | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 
 <PageTitle>Help Wanted</PageTitle>

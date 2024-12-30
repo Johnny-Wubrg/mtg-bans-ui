@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import { goto } from '$app/navigation';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	interface ReasonDefinition {
 		label: string;
@@ -36,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>Contact</title>
+	<title>Contact Us | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 
 <PageTitle>Contact</PageTitle>

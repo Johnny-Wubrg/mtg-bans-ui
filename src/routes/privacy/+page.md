@@ -1,9 +1,10 @@
 <script>
+import { PUBLIC_APP_NAME } from '$env/static/public';
 import PageTitle from '../../components/layout/PageTitle.svelte';
 </script>
 
 <svelte:head>
-<title>Privacy Policy</title>
+<title>{PUBLIC_APP_NAME} Privacy Policy</title>
 </svelte:head>
 
 <PageTitle>Privacy Policy</PageTitle>
