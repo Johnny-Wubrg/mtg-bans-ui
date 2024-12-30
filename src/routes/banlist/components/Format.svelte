@@ -14,12 +14,12 @@
 <h2>{format.format}</h2>
 
 {#if format.banned.length}
-	<h3>Banned</h3>
+	<h3>Banned ({format.banned.length})</h3>
 	<CardList cards={format.banned} classified />
 {/if}
 
 {#if format.restricted.length}
-	<h3>Restricted</h3>
+	<h3>Restricted ({format.restricted.length})</h3>
 	<CardList cards={format.restricted} classified />
 {/if}
 
