@@ -18,11 +18,11 @@
 		: cards.reduce<Record<string, Stuff>>((a, c) => {
 				if (!c.classification) return a;
 
-				a[c.classification.id] = a[c.classification.id] ?? {
+				a[c.classification.displayOrder] = a[c.classification.displayOrder] ?? {
 					classification: c.classification,
 					cards: []
 				};
-				a[c.classification.id].cards.push(c);
+				a[c.classification.displayOrder].cards.push(c);
 
 				return a;
 			}, {});

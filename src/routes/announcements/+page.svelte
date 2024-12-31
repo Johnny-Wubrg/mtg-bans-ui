@@ -3,8 +3,8 @@
 	import type { PageData } from './$types';
 	import FormattedDate from '../../components/FormattedDate.svelte';
 	import SpecialCredits from '../../components/SpecialCredits.svelte';
-	import CardList from '../../components/cards/CardList.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import Changeset from './components/Changeset.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	interface Props {
@@ -66,16 +66,7 @@
 				<h3>Changes</h3>
 
 				{#each announcement.changesets as changeset}
-					<h4>{changeset.format}</h4>
-
-					<ul>
-						{#each changeset.changes as change}
-							<li>
-								{change.type}
-								<CardList cards={change.cards} />
-							</li>
-						{/each}
-					</ul>
+					<Changeset {changeset} />
 				{/each}
 			{/if}
 
