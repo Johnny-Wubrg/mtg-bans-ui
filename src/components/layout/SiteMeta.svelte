@@ -1,10 +1,9 @@
 <script>
-	import { dev } from '$app/environment';
-	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import { PUBLIC_APP_NAME, PUBLIC_PLAUSIBLE_DOMAIN } from '$env/static/public';
 </script>
 
-{#if !dev}
-	<script defer data-domain="mtgbans.info" src="https://plausible.io/js/script.js"></script>
+{#if PUBLIC_PLAUSIBLE_DOMAIN}
+	<script defer data-domain={PUBLIC_PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js"></script>
 {/if}
 
 <meta
