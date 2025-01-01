@@ -9,4 +9,4 @@ export const formatDate = (date: string) => {
 	return formatter.format(convertedDate);
 };
 
-export const formatIsoDate = (date: Date) => date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+export const formatIsoDate = (date: Date) => date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
