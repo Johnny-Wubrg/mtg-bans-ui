@@ -6,6 +6,8 @@
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import TimeMachine from './components/TimeMachine.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import { onMount } from 'svelte';
+	import { trackCustomEvent } from '$lib/utils/tracking';
 
 	interface Props {
 		data: PageData;
@@ -22,6 +24,14 @@
 	const title = date ? `Historical Banlist - ${formatDate(date)}` : 'Current Banlist';
 	const now = new Date();
 	const isFuture = date && convertDate(new Date(date)) > now;
+
+	onMount(() => {
+		if (date)
+			trackCustomEvent('Time Travel', {
+				origin: 'Banlist',
+				date
+			});
+	});
 </script>
 
 <svelte:head>

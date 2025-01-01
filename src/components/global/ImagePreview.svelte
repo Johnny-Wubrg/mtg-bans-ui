@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { trackCustomEvent } from '$lib/utils/tracking';
+
 	let src = $state('');
 
 	let previewX: number = $state(-500);
@@ -8,6 +10,20 @@
 	const width = 220;
 	const height = $derived(220 * ratio);
 	const offset = 15;
+
+	let lastPreview = '';
+	let trackingDebouncer: number | null | undefined = null;
+	const trackPreview = (card: string) => {
+		if (!card) return;
+		if (lastPreview == card) return;
+		lastPreview = card;
+
+		if (trackingDebouncer) clearTimeout(trackingDebouncer);
+
+		trackingDebouncer = setTimeout(() => {
+			trackCustomEvent('Scryfall Preview', { card });
+		}, 200);
+	};
 
 	const handleMouseMove = (evt: MouseEvent) => {
 		const target = evt.target as HTMLElement;
@@ -21,11 +37,15 @@
 
 		if (!target.dataset.imagePreview) {
 			src = '';
+			lastPreview = '';
+      if (trackingDebouncer) clearTimeout(trackingDebouncer);
 			return;
 		}
 
 		src = target.dataset.imagePreview;
 		ratio = target.dataset.imageRatio ? parseFloat(target.dataset.imageRatio) : 2;
+
+		if (src.includes('cards.scryfall.io')) trackPreview(target.textContent?.trim() ?? '');
 	};
 
 	const resetImage = () => (src = '');
