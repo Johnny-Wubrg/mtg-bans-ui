@@ -26,16 +26,23 @@
 <PageTitle>MTG "Complete" Banned and Restricted Timeline</PageTitle>
 
 <p>
-	This is a timeline of every known update to the banned and restricted list of most officially supported constructed
-	Magic the Gathering formats. Sources for the announcements are included, with special thanks to the following sources
-	for aggregating a lot of this timeline:
+	This is a timeline of every known update to the banned and restricted list of most officially
+	supported constructed Magic the Gathering formats. Sources for the announcements are included,
+	with special thanks to the following sources for aggregating a lot of this timeline:
 </p>
 
 <SpecialCredits />
 
 <p>
-	Note that specifically for the Commander format, "Restricted" means "Banned as Commander". In all formats,
-	"Unbanned" means removed from the B&R list, regardless of whether it was banned or restricted.
+	Note that specifically for the Commander format:
+</p>
+<ul>
+	<li>Prior to 2015, "Restricted" means "Banned as Commander"</li>
+	<li>Starting in 2025, "Restricted" means "On the Game Changers List"</li>
+</ul>
+<p>
+	In all formats, "Unbanned" means removed from the B&R list, regardless of whether it was banned or
+	restricted.
 </p>
 
 <p>
@@ -71,7 +78,9 @@
 			{/if}
 
 			<p>
-				<a class="button" href="/banlist?date={announcement.dateEffective}">Click here to view the historical banlist at the time.</a>
+				<a class="button" href="/banlist?date={announcement.dateEffective}"
+					>Click here to view the historical banlist at the time.</a
+				>
 			</p>
 		</details>
 	</article>
