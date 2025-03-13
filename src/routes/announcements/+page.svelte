@@ -34,7 +34,7 @@
 <SpecialCredits />
 
 <p>
-	Note that in all formats, "Unbanned" means removed from the B&R list, regardless of its previously
+	Note that in all formats, "Unbanned" means removed from the B&R list, regardless of its previous
 	status.
 </p>
 
