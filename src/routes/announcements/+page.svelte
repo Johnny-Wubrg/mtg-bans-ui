@@ -34,15 +34,8 @@
 <SpecialCredits />
 
 <p>
-	Note that specifically for the Commander format:
-</p>
-<ul>
-	<li>Prior to 2015, "Restricted" means "Banned as Commander"</li>
-	<li>Starting in 2025, "Restricted" means "On the Game Changers List"</li>
-</ul>
-<p>
-	In all formats, "Unbanned" means removed from the B&R list, regardless of whether it was banned or
-	restricted.
+	Note that in all formats, "Unbanned" means removed from the B&R list, regardless of its previously
+	status.
 </p>
 
 <p>
