@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { FormatBans } from '$lib/models/Card';
-	import { convertDate, formatDate } from '$lib/utils/date';
+	import { convertDate, formatDateString } from '$lib/utils/date';
 	import Format from './components/Format.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import TimeMachine from './components/TimeMachine.svelte';
@@ -21,7 +21,7 @@
 	const { data }: Props = $props();
 	const { date, bans }: Data = data;
 
-	const title = date ? `Historical Banlist - ${formatDate(date)}` : 'Current Banlist';
+	const title = date ? `Historical Banlist - ${formatDateString(date)}` : 'Current Banlist';
 	const now = new Date();
 	const isFuture = date && convertDate(new Date(date)) > now;
 
