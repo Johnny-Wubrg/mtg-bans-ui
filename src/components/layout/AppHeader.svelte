@@ -1,6 +1,10 @@
 <script lang="ts">
 	import Wordmark from './Wordmark.svelte';
 
+	import { getMaintenance } from '$lib/utils/maintenance';
+
+	const maintenance = getMaintenance();
+
 	interface Navlink {
 		href: string;
 		label: string;
@@ -16,15 +20,17 @@
 	<a href="/" class="brand-link">
 		<Wordmark />
 	</a>
-	<nav>
-		{#each navlinks as navlink}
-			<a href={navlink.href} class="nav-link">
-				<div class="nav-control">
-					{navlink.label}
-				</div>
-			</a>&nbsp;
-		{/each}
-	</nav>
+	{#if maintenance.status !== 'active'}
+		<nav>
+			{#each navlinks as navlink}
+				<a href={navlink.href} class="nav-link">
+					<div class="nav-control">
+						{navlink.label}
+					</div>
+				</a>&nbsp;
+			{/each}
+		</nav>
+	{/if}
 </header>
 
 <style lang="scss">
