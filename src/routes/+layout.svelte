@@ -9,6 +9,7 @@
 	import MaintenanceMessage from '../components/layout/MaintenanceMessage.svelte';
 	import 'iconify-icon';
 	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
 
 	let { children } = $props();
 
@@ -20,7 +21,9 @@
 <div class="app">
 	<AppHeader />
 
-	{#if maintenance.status === 'scheduled' || (maintenance.status === 'active' && $page.data.maintenanceExempt)}
+	{#if browser 
+		&& (maintenance.status === 'scheduled' 
+		|| (maintenance.status === 'active' && $page.data.maintenanceExempt))}
 		<Notice>
 			{maintenance.message}
 		</Notice>
