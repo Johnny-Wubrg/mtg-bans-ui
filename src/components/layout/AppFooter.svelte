@@ -6,7 +6,7 @@
 
 <footer class="container">
 	<p>
-		A <a href="https://www.quangdao.com">Quangdao Nguyen</a> catastrophe. All rights reserved. |
+		A <a href="https://www.johnnywubrg.com">Johnny Wubrg</a> catastrophe by <a href="https://www.quangdao.com">Quangdao Nguyen</a>. All rights reserved. |
 		<a href="/privacy">Privacy Policy</a>
 	</p>
 
