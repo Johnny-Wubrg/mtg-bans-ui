@@ -32,7 +32,7 @@ We value your privacy and strive to collect minimal personal data. Here’s how 
 
 ### Cookies
 
-There are no cookies on this site -- well, except maybe the occasional gingerbread man from Eldraine.
+There are no cookies on this site -- well, except maybe the occasional gingerbread folk from Eldraine.
 
 ### Summary of Third-Party Services
 
@@ -41,4 +41,4 @@ Below is a recap of third-party services used by this website. For detailed info
 1. **Plausible Analytics** - Privacy-respecting analytics are powered by Plausible. [Here is their data policy.](https://plausible.io/data-policy)
 2. **Netlify Forms** - The contact form is powered by Netlify Forms. For more information, please [review their privacy policy](https://www.netlify.com/privacy/).
 
-_Last Updated: <FormattedDate date="2024-12-30" />_
+_Last Updated: <FormattedDate date="2025-06-12" />_
