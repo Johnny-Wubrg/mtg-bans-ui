@@ -3,6 +3,7 @@
 
 	import { getMaintenance } from '$lib/utils/maintenance';
 	import type { MenuLink } from '$lib/utils/menus';
+	import AppMenu from './AppMenu.svelte';
 
 	const maintenance = getMaintenance();
 
@@ -18,15 +19,7 @@
 		<Wordmark />
 	</a>
 	{#if maintenance.status !== 'active'}
-		<nav>
-			{#each menu as item}
-				<a href={item.href} class="nav-link">
-					<div class="nav-control">
-						{item.label}
-					</div>
-				</a>&nbsp;
-			{/each}
-		</nav>
+		<AppMenu {menu} />
 	{/if}
 </header>
 
@@ -50,18 +43,5 @@
 		display: block;
 		text-decoration: none;
 		text-align: center;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-
-		@include breakpoints.large {
-			justify-content: start;
-		}
-	}
-
-	.nav-control {
-		padding: 1em;
 	}
 </style>
