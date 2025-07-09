@@ -8,3 +8,5 @@ export async function load({ params }) {
 		format
 	};
 }
+
+export const prerender = false;
