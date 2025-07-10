@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { FormatDetail, FormatSnapshot } from '$lib/models/Format';
-	import type { GraphMetric } from '$lib/models/Graphics';
+	import type { GraphColor, GraphMetric } from '$lib/models/Graphics';
 	import CardList from '../../../components/cards/CardList.svelte';
 	import FormattedDate from '../../../components/FormattedDate.svelte';
-	import LineGraph from '../../../components/graphics/LineGraph.svelte';
+	import StepperGraph from '../../../components/graphics/StepperGraph.svelte';
 
 	interface PageData {
 		format: FormatDetail;
@@ -25,25 +25,30 @@
 	);
 
 	const limitationTypes = $derived(
-		new Set(...format.timeline.map((t) => t.limitations.map((l) => l.status)))
-	);
+  format.timeline
+    .flatMap((t) => t.limitations.map((l) => ({ status: l.status, color: l.color })))
+    .filter((item, index, array) => 
+      array.findIndex(other => other.status === item.status) === index
+    )
+);
 
-	const metrics: GraphMetric<FormatSnapshot, string, number>[] = $derived(
+	const metrics: GraphMetric<FormatSnapshot, Date, number>[] = $derived(
 		[...limitationTypes].map((l) => ({
-			label: l,
+			label: l.status,
+			color: l.color ?? 'white',
 			nodes: format.timeline.map((snapshot) => {
-				const count = snapshot.limitations.find((lm) => lm.status === l)?.cards.length ?? 0;
+				const count = snapshot.limitations.find((lm) => lm.status === l.status)?.cards.length ?? 0;
 				return {
 					value: snapshot,
 					label: `${snapshot.date} (${count} cards ${l})`,
-					x: snapshot.date,
+					x: new Date(snapshot.date),
 					y: count
 				};
 			})
 		}))
 	);
 
-	const xMax = new Date().toISOString().substring(0, 10);
+	const xMax = new Date();
 
 	$effect(() => {
 		if (page.params.slug !== currentPage) {
@@ -66,12 +71,7 @@
 
 	<h2>Banlist</h2>
 
-	<LineGraph
-		{metrics}
-		getXValue={(x) => new Date(x).valueOf()}
-		{xMax}
-		onnodeclicked={(node) => (selectedDate = node.date)}
-	/>
+	<StepperGraph {metrics} {xMax} onnodeclicked={(node) => (selectedDate = node.date)} />
 
 	{#if selectedDate}
 		<FormattedDate date={selectedDate} />
