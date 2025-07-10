@@ -26,7 +26,10 @@
 	const viewBoxWidth = graphWidth + yLabelWidth + 2 * padding;
 	const viewBoxHeight = graphHeight + xLabelHeight + 2 * padding;
 
-	const { lines } = getGraphData(props);
+	let visibleMetrics = $state(metrics.map((m) => m.label));
+	let metricsToShow = $derived(metrics.filter((m) => visibleMetrics.includes(m.label)));
+
+	const { lines } = $derived(getGraphData({ ...props, metrics: metricsToShow }));
 
 	const getGraphX = (magnitude: number) => graphX + graphWidth * magnitude;
 	const getGraphY = (magnitude: number) => graphBottom - graphHeight * magnitude;
@@ -42,20 +45,32 @@
 			};
 
 			instructions.push(`${getGraphX(node.x)} ${getGraphY(node.y)}`);
-			instructions.push(`${next.x} ${next.y}`);
+			if (i < nodes.length - 1 || node.y > 0) instructions.push(`${next.x} ${next.y}`);
 		}
+
 		return 'M ' + instructions.join(' L ');
 	};
+
+	const getMetricId = (metric: string) => `metric-${metric.toLowerCase().replace(/\W+/g, '-')}`;
 </script>
 
 <div class="graph">
 	<div class="legend">
 		{#each metrics as metric}
 			<div class="legend-metric">
-				<div class={['legend-color', metric.color]}></div>
-				<span class="legend-label">
-					{metric.label}
-				</span>
+				<input
+					type="checkbox"
+					id={getMetricId(metric.label)}
+					bind:group={visibleMetrics}
+					disabled={visibleMetrics.length === 1 && visibleMetrics.includes(metric.label)}
+					value={metric.label}
+				/>
+				<label class="legend-control" for={getMetricId(metric.label)}>
+					<div class={['legend-color', metric.color]}></div>
+					<span class="legend-label">
+						{metric.label}
+					</span>
+				</label>
 			</div>
 		{/each}
 	</div>
@@ -74,19 +89,19 @@
 					stroke-width="1"
 				/>
 
-				{#each line.nodes as node}
-					<circle
+				<!-- {#each line.nodes as node}
+						<circle
 						class="node"
 						cx={getGraphX(node.x)}
 						cy={getGraphY(node.y)}
 						r="2"
 						onclick={() => onnodeclicked?.(node.value)}
 						onkeydown={(evt) =>
-							evt.key !== 'Space' || !onnodeclicked || onnodeclicked?.(node.value)}
+						evt.key !== 'Space' || !onnodeclicked || onnodeclicked?.(node.value)}
 						role="button"
 						tabindex="0"
-					/>
-				{/each}
+						/>
+						{/each} -->
 			</g>
 		{/each}
 	</svg>
@@ -95,13 +110,10 @@
 <style lang="scss">
 	@use '@scissors/media';
 	.graph {
-		--color-graphics: black;
-		@include media.dark {
-			--color-graphics: white;
-		}
+		--color-graphics: var(--color-text);
 
 		.red {
-			--color-graphics: red;
+			--color-graphics: var(--mtg-red);
 		}
 
 		.yellow {
@@ -109,13 +121,26 @@
 		}
 
 		.green {
-			--color-graphics: green;
+			--color-graphics: var(--mtg-green);
 		}
 	}
 
 	.legend {
 		&-metric {
-			display: inline-flex;
+			display: inline-block;
+			input {
+				display: none;
+				&:not(:checked) + .legend-control .legend-label {
+					opacity: 0.5;
+				}
+				&:disabled + .legend-control {
+					cursor: default;
+				}
+			}
+		}
+		&-control {
+			cursor: pointer;
+			display: flex;
 			align-items: center;
 			margin: 0 2em;
 			font-size: 0.875em;

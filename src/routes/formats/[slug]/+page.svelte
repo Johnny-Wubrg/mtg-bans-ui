@@ -25,29 +25,39 @@
 	);
 
 	const limitationTypes = $derived(
-  format.timeline
-    .flatMap((t) => t.limitations.map((l) => ({ status: l.status, color: l.color })))
-    .filter((item, index, array) => 
-      array.findIndex(other => other.status === item.status) === index
-    )
-);
+		format.timeline
+			.flatMap((t) => t.limitations.map((l) => ({ status: l.status, color: l.color })))
+			.filter(
+				(item, index, array) => array.findIndex((other) => other.status === item.status) === index
+			)
+	);
 
 	const metrics: GraphMetric<FormatSnapshot, Date, number>[] = $derived(
-		[...limitationTypes].map((l) => ({
-			label: l.status,
-			color: l.color ?? 'white',
-			nodes: format.timeline.map((snapshot) => {
+		[...limitationTypes].map((l) => {
+			const allNodes = format.timeline.map((snapshot) => {
 				const count = snapshot.limitations.find((lm) => lm.status === l.status)?.cards.length ?? 0;
 				return {
 					value: snapshot,
-					label: `${snapshot.date} (${count} cards ${l})`,
+					label: `${snapshot.date} (${count} cards ${l.status})`,
 					x: new Date(snapshot.date),
 					y: count
 				};
-			})
-		}))
+			});
+
+			// Find the first index where y is non-zero
+			const firstNonZeroIndex = allNodes.findIndex((node) => node.y > 0);
+
+			return {
+				label: l.status,
+				color: l.color ?? 'white',
+				nodes: firstNonZeroIndex === -1 ? [] : allNodes.slice(firstNonZeroIndex)
+			};
+		})
 	);
 
+	const xMin = $derived(
+		new Date(Math.min(...format.events.map((e) => new Date(e.dateEffective).valueOf())))
+	);
 	const xMax = new Date();
 
 	$effect(() => {
@@ -71,7 +81,13 @@
 
 	<h2>Banlist</h2>
 
-	<StepperGraph {metrics} {xMax} onnodeclicked={(node) => (selectedDate = node.date)} />
+	<StepperGraph
+		{metrics}
+		{xMin}
+		{xMax}
+		yMin={0}
+		onnodeclicked={(node) => (selectedDate = node.date)}
+	/>
 
 	{#if selectedDate}
 		<FormattedDate date={selectedDate} />

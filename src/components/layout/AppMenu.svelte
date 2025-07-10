@@ -61,7 +61,8 @@
 			text-align: left;
 			list-style-type: none;
       &-link {
-        display: block;
+				color: var(--color-white);
+				display: block;
         line-height: 1;
         padding: 0.75em 1em;
       }
