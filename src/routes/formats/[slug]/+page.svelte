@@ -4,7 +4,7 @@
 	import type { GraphColor, GraphMetric } from '$lib/models/Graphics';
 	import CardList from '../../../components/cards/CardList.svelte';
 	import FormattedDate from '../../../components/FormattedDate.svelte';
-	import StepperGraph from '../../../components/graphics/StepperGraph.svelte';
+	import LineGraph from '../../../components/graphics/LineGraph.svelte';
 
 	interface PageData {
 		format: FormatDetail;
@@ -81,7 +81,7 @@
 
 	<h2>Banlist</h2>
 
-	<StepperGraph
+	<LineGraph stepped
 		{metrics}
 		{xMin}
 		{xMax}

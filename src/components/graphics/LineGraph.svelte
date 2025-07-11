@@ -3,12 +3,13 @@
 	import { getGraphData } from '$lib/utils/graphics';
 
 	interface Props extends GraphSettings<TValue, TX, TY> {
+		stepped?: boolean;
 		onnodeclicked?: (val: TValue) => void;
 	}
 
 	const props: Props = $props();
 
-	const { metrics, onnodeclicked } = props;
+	const { metrics, stepped = false, onnodeclicked } = props;
 
 	const padding = 4;
 
@@ -45,7 +46,7 @@
 			};
 
 			instructions.push(`${getGraphX(node.x)} ${getGraphY(node.y)}`);
-			if (i < nodes.length - 1 || node.y > 0) instructions.push(`${next.x} ${next.y}`);
+			if (stepped && (i < nodes.length - 1 || node.y > 0)) instructions.push(`${next.x} ${next.y}`);
 		}
 
 		return 'M ' + instructions.join(' L ');
