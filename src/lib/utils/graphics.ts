@@ -24,11 +24,11 @@ function getLines<TValue, TX extends GraphDataPoint, TY extends GraphDataPoint>(
 	xPoints: KeyPoints,
 	yPoints: KeyPoints
 ): ComputedMetric<TValue>[] {
-  return metrics.map((m) => {
+	return metrics.map((m) => {
 		return {
 			label: m.label,
 			color: m.color ?? 'white',
-      nodes: m.nodes.reduce((a, n) => {
+			nodes: m.nodes.reduce((a, n) => {
 				const x = (getValue(n.x) - xPoints.min) / xPoints.diff;
 				const y = (getValue(n.y) - yPoints.min) / yPoints.diff;
 
@@ -74,6 +74,85 @@ const getKeyPoints = <T extends GraphDataPoint>(
 	return { min, max, diff: max - min };
 };
 
+interface GraphLabel {
+	text: string;
+	proportion: number;
+}
+
+const createDateIncrementer = (diff: number): ((val: Date) => Date) => {
+	return (val: Date) => {
+		const d = new Date(val);
+		if (diff > 20) return new Date(d.setFullYear(d.getFullYear() + 1));
+		if (diff > 10) return new Date(d.setMonth(d.getMonth() + 6));
+		return new Date(d.setMonth(d.getMonth() + 3));
+	};
+};
+
+const getDateLabels = (pt: KeyPoints) => {
+	const labels: GraphLabel[] = [];
+
+	const min = new Date(pt.min);
+	const max = new Date(pt.max);
+
+	const diffInYears = pt.diff / (365.25 * 24 * 60 * 60 * 1000);
+
+	const formatter = new Intl.DateTimeFormat('en-US', {
+		month: diffInYears > 20 ? undefined : 'short',
+		year: 'numeric'
+	});
+	const increment = createDateIncrementer(diffInYears);
+
+	let next = increment(min);
+	next.setDate(1);
+	next.setMonth(0);
+
+	while (next <= max) {
+		labels.push({
+			text: formatter.format(next),
+			proportion: (next.valueOf() - pt.min) / pt.diff
+		});
+
+		next = increment(next);
+	}
+
+	return labels;
+};
+
+const createNumIncrementer = (diff: number): ((val: number) => number) => {
+	if (diff > 100) return (val: number) => val + 20;
+	if (diff > 50) return (val: number) => val + 10;
+	if (diff > 20) return (val: number) => val + 5;
+	return (val: number) => val + 2;
+};
+
+const getLabels = (pt: KeyPoints, isDate: boolean) => {
+	if (isDate) return getDateLabels(pt);
+
+	const labels: GraphLabel[] = [];
+
+	const { min, max, diff } = pt;
+
+	const increment = createNumIncrementer(diff);
+
+	let next = increment(min);
+
+	labels.push({
+		text: min.toLocaleString(),
+		proportion: 0
+	});
+
+	while (next <= max) {
+		labels.push({
+			text: next.toLocaleString(),
+			proportion: (next - min) / diff
+		});
+
+		next = increment(next);
+	}
+
+	return labels;
+};
+
 export const getGraphData = <TValue, TX extends GraphDataPoint, TY extends GraphDataPoint>(
 	settings: GraphSettings<TValue, TX, TY>
 ) => {
@@ -81,11 +160,13 @@ export const getGraphData = <TValue, TX extends GraphDataPoint, TY extends Graph
 
 	const xValues = getValues(metrics, 'x');
 	const xPoints = getKeyPoints(xValues, xMin, xMax);
+	const xLabels = getLabels(xPoints, metrics[0].nodes[0].x instanceof Date);
 
 	const yValues = getValues(metrics, 'y');
 	const yPoints = getKeyPoints(yValues, yMin, yMax);
+	const yLabels = getLabels(yPoints, metrics[0].nodes[0].y instanceof Date);
 
 	const lines: ComputedMetric<TValue>[] = getLines<TValue, TX, TY>(metrics, xPoints, yPoints);
 
-	return { lines };
+	return { lines, labels: { x: xLabels, y: yLabels } };
 };

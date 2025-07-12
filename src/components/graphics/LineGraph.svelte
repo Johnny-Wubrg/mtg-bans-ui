@@ -11,11 +11,11 @@
 
 	const { metrics, stepped = false, onnodeclicked } = props;
 
-	const padding = 4;
+	const padding = 8;
 
-	const yLabelWidth = 10;
+	const yLabelWidth = 20;
 
-	const xLabelHeight = 30;
+	const xLabelHeight = 60;
 
 	const graphWidth = 1000;
 	const graphHeight = 200;
@@ -30,7 +30,7 @@
 	let visibleMetrics = $state(metrics.map((m) => m.label));
 	let metricsToShow = $derived(metrics.filter((m) => visibleMetrics.includes(m.label)));
 
-	const { lines } = $derived(getGraphData({ ...props, metrics: metricsToShow }));
+	const { lines, labels } = $derived(getGraphData({ ...props, metrics: metricsToShow }));
 
 	const getGraphX = (magnitude: number) => graphX + graphWidth * magnitude;
 	const getGraphY = (magnitude: number) => graphBottom - graphHeight * magnitude;
@@ -105,6 +105,41 @@
 						{/each} -->
 			</g>
 		{/each}
+
+		{#each labels.x as label}
+			{@const x = getGraphX(label.proportion)}
+			{@const y = graphBottom}
+			<line class="stroked" x1={x} y1={y - 2} x2={x} y2={y + 4} stroke-width="1" />
+
+			<text
+				class="label"
+				{x}
+				{y}
+				text-anchor="end"
+				dominant-baseline="middle"
+				transform="rotate(-90 {x} {y}) translate(-8)"
+			>
+				{label.text}
+			</text>
+		{/each}
+
+		{#each labels.y as label}
+			{@const x = graphX}
+			{@const y = getGraphY(label.proportion)}
+			<line class="stroked" x1={x - 4} y1={y} x2={x + 2} y2={y} stroke-width="1" />
+
+			<text
+				class="label"
+				{x}
+				{y}
+				text-anchor="end"
+				dominant-baseline="middle"
+				transform="translate(-8)"
+			>
+				{label.text}
+			</text>
+			<!-- <circle class="node" cx={graphX} cy={getGraphY(label.proportion)} r="2" /> -->
+		{/each}
 	</svg>
 </div>
 
@@ -161,5 +196,11 @@
 	.node {
 		cursor: pointer;
 		fill: var(--color-graphics);
+	}
+
+	.label {
+		fill: var(--color-graphics);
+		font-size: 8pt;
+		// font-family: cursive;
 	}
 </style>
