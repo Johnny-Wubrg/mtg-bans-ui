@@ -3,6 +3,7 @@
 	import type { FormatDetail, FormatSnapshot } from '$lib/models/Format';
 	import type { GraphColor, GraphMetric, GraphNode } from '$lib/models/Graphics';
 	import { convertDate, formatDateString, formatIsoDate } from '$lib/utils/date';
+	import { trackCustomEvent } from '$lib/utils/tracking';
 	import CardList from '../../../components/cards/CardList.svelte';
 	import FormattedDate from '../../../components/FormattedDate.svelte';
 	import LineGraph from '../../../components/graphics/LineGraph.svelte';
@@ -82,6 +83,14 @@
 	);
 	const xMax = new Date();
 
+	const selectDate = (date: Date) => {
+		selectedDate = formatIsoDate(date);
+		trackCustomEvent('Time Travel', {
+			origin: `Format - ${format.name}`,
+			date: selectedDate
+		});
+	};
+
 	$effect(() => {
 		if (page.params.slug !== currentPage) {
 			selectedDate = format.timeline[format.timeline.length - 1].date;
@@ -103,14 +112,7 @@
 
 	<h2>Banlist</h2>
 
-	<LineGraph
-		stepped
-		{metrics}
-		{xMin}
-		{xMax}
-		yMin={0}
-		onnodeclicked={(node) => (selectedDate = formatIsoDate(node))}
-	/>
+	<LineGraph stepped {metrics} {xMin} {xMax} yMin={0} onNavigated={selectDate} />
 
 	<div class="selector">
 		<select bind:value={selectedDate}>

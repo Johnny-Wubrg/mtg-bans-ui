@@ -5,12 +5,12 @@
 
 	interface Props extends GraphSettings<TValue, TX, TY> {
 		stepped?: boolean;
-		onnodeclicked?: (val: TX) => void;
+		onNavigated?: (val: TX) => void;
 	}
 
 	const props: Props = $props();
 
-	const { metrics, stepped = false, onnodeclicked } = props;
+	const { metrics, stepped = false, onNavigated: onnodeclicked } = props;
 
 	const padding = 8;
 
