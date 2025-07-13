@@ -79,16 +79,22 @@
 	);
 
 	const xMin = $derived(
-		new Date(Math.min(...format.events.map((e) => convertDate(new Date(e.dateEffective)).valueOf())))
+		new Date(
+			Math.min(...format.events.map((e) => convertDate(new Date(e.dateEffective)).valueOf()))
+		)
 	);
 	const xMax = new Date();
 
-	const selectDate = (date: Date) => {
-		selectedDate = formatIsoDate(date);
+	const trackTimeTravel = (mode: string) =>
 		trackCustomEvent('Time Travel', {
 			origin: `Format - ${format.name}`,
+			mode,
 			date: selectedDate
 		});
+
+	const selectDate = (date: Date) => {
+		selectedDate = formatIsoDate(date);
+		trackTimeTravel('Graph');
 	};
 
 	$effect(() => {
@@ -115,7 +121,7 @@
 	<LineGraph stepped {metrics} {xMin} {xMax} yMin={0} onNavigated={selectDate} />
 
 	<div class="selector">
-		<select bind:value={selectedDate}>
+		<select bind:value={selectedDate} onchange={() => trackTimeTravel('Dropdown')}>
 			{#each possibleDates as date}
 				<option value={date}>{formatDateString(date)}</option>
 			{/each}
