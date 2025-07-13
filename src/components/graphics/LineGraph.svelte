@@ -147,29 +147,6 @@
 		<line class="stroked" x1={graphX} y1={graphY} x2={graphX} y2={graphBottom} />
 		<line class="stroked" x1={graphX} y1={graphBottom} x2={graphRight} y2={graphBottom} />
 
-		{#each lines as line}
-			<g class={[line.color]}>
-				<path
-					class="stroked"
-					d={createPath(line.nodes)}
-					fill="none"
-					stroke="black"
-					stroke-width="1"
-				/>
-
-				{#each line.nodes as node}
-					<circle
-						class="node"
-						cx={getGraphX(node.x)}
-						cy={getGraphY(node.y)}
-						r="2"
-						role="button"
-						tabindex="0"
-					/>
-				{/each}
-			</g>
-		{/each}
-
 		{#each x.labels as label}
 			{@const x = getGraphX(label.proportion)}
 			{@const y = graphBottom}
@@ -203,6 +180,52 @@
 				{label.text}
 			</text>
 			<!-- <circle class="node" cx={graphX} cy={getGraphY(label.proportion)} r="2" /> -->
+		{/each}
+
+		{#if marker.visible}
+			<line
+				class="marker"
+				class:selectable
+				x1={marker.x}
+				y1={graphBottom}
+				x2={marker.x}
+				y2={graphY}
+				stroke-width="1"
+				stroke-dasharray={selectable != null ? '0' : '2 3'}
+			/>
+
+			<text
+				class="label"
+				x={marker.x + (marker.offset ? -8 : 8)}
+				y={graphY + 20}
+				text-anchor={marker.offset ? 'end' : 'start'}
+				dominant-baseline="middle"
+			>
+				{marker.label}
+			</text>
+		{/if}
+
+		{#each lines as line}
+			<g class={[line.color]}>
+				<path
+					class="stroked"
+					d={createPath(line.nodes)}
+					fill="none"
+					stroke="black"
+					stroke-width="1"
+				/>
+
+				{#each line.nodes as node}
+					<circle
+						class="node"
+						cx={getGraphX(node.x)}
+						cy={getGraphY(node.y)}
+						r="2"
+						role="button"
+						tabindex="0"
+					/>
+				{/each}
+			</g>
 		{/each}
 
 		{#if marker.visible}
