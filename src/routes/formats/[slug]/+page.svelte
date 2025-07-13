@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { FormatDetail, FormatSnapshot } from '$lib/models/Format';
-	import type { GraphColor, GraphMetric, GraphNode } from '$lib/models/Graphics';
+	import type { GraphMetric, GraphNode } from '$lib/models/Graphics';
 	import { convertDate, formatDateString, formatIsoDate } from '$lib/utils/date';
 	import { trackCustomEvent } from '$lib/utils/tracking';
 	import CardList from '../../../components/cards/CardList.svelte';
