@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { FormatDetail, FormatSnapshot } from '$lib/models/Format';
-	import type { GraphColor, GraphMetric } from '$lib/models/Graphics';
+	import type { GraphColor, GraphMetric, GraphNode } from '$lib/models/Graphics';
+	import { convertDate, formatDateString, formatIsoDate } from '$lib/utils/date';
 	import CardList from '../../../components/cards/CardList.svelte';
 	import FormattedDate from '../../../components/FormattedDate.svelte';
 	import LineGraph from '../../../components/graphics/LineGraph.svelte';
@@ -24,6 +25,8 @@
 		format.timeline.find((e) => e.date === selectedDate)?.limitations ?? []
 	);
 
+	let possibleDates = $derived(format.timeline.map((e) => e.date));
+
 	const limitationTypes = $derived(
 		format.timeline
 			.flatMap((t) => t.limitations.map((l) => ({ status: l.status, color: l.color })))
@@ -34,23 +37,42 @@
 
 	const metrics: GraphMetric<FormatSnapshot, Date, number>[] = $derived(
 		[...limitationTypes].map((l) => {
-			const allNodes = format.timeline.map((snapshot) => {
-				const count = snapshot.limitations.find((lm) => lm.status === l.status)?.cards.length ?? 0;
-				return {
-					value: snapshot,
-					label: `${snapshot.date} (${count} cards ${l.status})`,
-					x: new Date(snapshot.date),
-					y: count
-				};
-			});
+			const allNodes = format.timeline.reduce(
+				(agg, snapshot, i) => {
+					const previousCards =
+						i === 0
+							? []
+							: format.timeline[i - 1].limitations.find((lm) => lm.status === l.status)?.cards;
 
-			// Find the first index where y is non-zero
-			const firstNonZeroIndex = allNodes.findIndex((node) => node.y > 0);
+					const cards = snapshot.limitations.find((lm) => lm.status === l.status)?.cards;
+					const count = cards?.length ?? 0;
+
+					if (
+						(!agg.length && count === 0) ||
+						previousCards?.map((c) => c.scryfallId).join(',') ===
+							cards?.map((c) => c.scryfallId).join(',')
+					) {
+						return agg;
+					}
+
+					const next = {
+						value: snapshot,
+						label: `${snapshot.date} (${count} cards ${l.status})`,
+						x: convertDate(new Date(snapshot.date)),
+						y: count
+					};
+
+					agg.push(next);
+
+					return agg;
+				},
+				[] as GraphNode<FormatSnapshot, Date, number>[]
+			);
 
 			return {
 				label: l.status,
 				color: l.color ?? 'white',
-				nodes: firstNonZeroIndex === -1 ? [] : allNodes.slice(firstNonZeroIndex)
+				nodes: allNodes
 			};
 		})
 	);
@@ -81,17 +103,22 @@
 
 	<h2>Banlist</h2>
 
-	<LineGraph stepped
+	<LineGraph
+		stepped
 		{metrics}
 		{xMin}
 		{xMax}
 		yMin={0}
-		onnodeclicked={(node) => (selectedDate = node.date)}
+		onnodeclicked={(node) => (selectedDate = formatIsoDate(node))}
 	/>
 
-	{#if selectedDate}
-		<FormattedDate date={selectedDate} />
-	{/if}
+	<div class="selector">
+		<select bind:value={selectedDate}>
+			{#each possibleDates as date}
+				<option value={date}>{formatDateString(date)}</option>
+			{/each}
+		</select>
+	</div>
 
 	{#if !limitations.length}
 		<p>No cards were banned or restricted at this time.</p>

@@ -123,12 +123,17 @@ button, a.button {
   line-height: 1.2;
 }
 
-select, textarea, input[type="text"], input[type="date"], input[type="email"] {
+select:not(option), textarea, input[type="text"], input[type="date"], input[type="email"] {
   border: 2px solid var(--color-border);
   padding: 0.5em 1em;
   border-radius: 0;
   background: transparent;
   color: var(--color-text);
+}
+
+option {
+  color: initial;
+  background: initial;
 }
 
 ul, ol {

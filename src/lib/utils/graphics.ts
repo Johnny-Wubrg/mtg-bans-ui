@@ -32,8 +32,6 @@ function getLines<TValue, TX extends GraphDataPoint, TY extends GraphDataPoint>(
 				const x = (getValue(n.x) - xPoints.min) / xPoints.diff;
 				const y = (getValue(n.y) - yPoints.min) / yPoints.diff;
 
-				if (a.length > 1 && a[a.length - 1].y === y) return a;
-
 				a.push({
 					value: n.value,
 					label: n.label ?? '',
@@ -160,13 +158,29 @@ export const getGraphData = <TValue, TX extends GraphDataPoint, TY extends Graph
 
 	const xValues = getValues(metrics, 'x');
 	const xPoints = getKeyPoints(xValues, xMin, xMax);
-	const xLabels = getLabels(xPoints, metrics[0].nodes[0].x instanceof Date);
+	const xIsDate = metrics[0].nodes[0].x instanceof Date;
+	const xLabels = getLabels(xPoints, xIsDate);
 
 	const yValues = getValues(metrics, 'y');
 	const yPoints = getKeyPoints(yValues, yMin, yMax);
-	const yLabels = getLabels(yPoints, metrics[0].nodes[0].y instanceof Date);
+	const yIsDate = metrics[0].nodes[0].y instanceof Date;
+	const yLabels = getLabels(yPoints, yIsDate);
 
 	const lines: ComputedMetric<TValue>[] = getLines<TValue, TX, TY>(metrics, xPoints, yPoints);
 
-	return { lines, labels: { x: xLabels, y: yLabels } };
+	return {
+		lines,
+		x: {
+			labels: xLabels,
+			points: xPoints,
+			values: xValues,
+			isDate: xIsDate
+		},
+		y: {
+			labels: yLabels,
+			points: yPoints,
+			values: yValues,
+			isDate: yIsDate
+		}
+	};
 };

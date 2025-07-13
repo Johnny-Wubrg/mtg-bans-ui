@@ -1,10 +1,11 @@
 <script lang="ts" generics="TValue, TX  extends GraphDataPoint, TY extends GraphDataPoint">
 	import type { ComputedNode, GraphDataPoint, GraphSettings } from '$lib/models/Graphics';
+	import { convertDate, formatIsoDate } from '$lib/utils/date';
 	import { getGraphData } from '$lib/utils/graphics';
 
 	interface Props extends GraphSettings<TValue, TX, TY> {
 		stepped?: boolean;
-		onnodeclicked?: (val: TValue) => void;
+		onnodeclicked?: (val: TX) => void;
 	}
 
 	const props: Props = $props();
@@ -21,7 +22,7 @@
 	const graphHeight = 200;
 	const graphX = yLabelWidth + padding;
 	const graphY = 0 + padding;
-	const graphLeft = graphX + graphWidth;
+	const graphRight = graphX + graphWidth;
 	const graphBottom = graphY + graphHeight;
 
 	const viewBoxWidth = graphWidth + yLabelWidth + 2 * padding;
@@ -29,11 +30,70 @@
 
 	let visibleMetrics = $state(metrics.map((m) => m.label));
 	let metricsToShow = $derived(metrics.filter((m) => visibleMetrics.includes(m.label)));
+	let graphicElement: SVGElement;
+	let selectable: TX | null = $state(null);
 
-	const { lines, labels } = $derived(getGraphData({ ...props, metrics: metricsToShow }));
+	const { lines, x, y } = $derived(getGraphData({ ...props, metrics: metricsToShow }));
 
 	const getGraphX = (magnitude: number) => graphX + graphWidth * magnitude;
 	const getGraphY = (magnitude: number) => graphBottom - graphHeight * magnitude;
+
+	const marker = $state({
+		visible: true,
+		x: graphX,
+		label: '',
+		offset: false
+	});
+
+	const handleMouseMove = (evt: MouseEvent) => {
+		const { clientX, clientY } = evt;
+		const rect = graphicElement.getBoundingClientRect();
+		const effectiveX = ((clientX - rect.left) / rect.width) * viewBoxWidth;
+		const effectiveY = ((clientY - rect.top) / rect.height) * viewBoxHeight;
+
+		selectable = null;
+
+		if (
+			effectiveX < graphX ||
+			effectiveX > graphRight ||
+			effectiveY < graphY ||
+			effectiveY > graphBottom
+		) {
+			marker.visible = false;
+			marker.label = '';
+			return true;
+		}
+
+		marker.visible = true;
+
+		const proportion = (effectiveX - graphX) / graphWidth;
+		const effectiveValue = x.points.diff * proportion + x.points.min;
+		const closest = x.values
+			.keys()
+			.toArray()
+			.toSorted((b, a) => Math.abs(b - effectiveValue) - Math.abs(a - effectiveValue))[0];
+
+		const closestProportion = (closest - x.points.min) / x.points.diff;
+		let target = proportion;
+		let value = effectiveValue;
+
+		if (closest && Math.abs(closestProportion - proportion) < 0.01) {
+			target = closestProportion;
+			value = closest;
+			selectable = (x.isDate ? new Date(closest) : closest) as TX;
+		}
+
+		marker.x = getGraphX(target);
+		marker.label = x.isDate
+			? convertDate(new Date(value)).toLocaleDateString()
+			: effectiveValue.toLocaleString();
+		marker.offset = target > 0.5;
+	};
+
+	const handleClick = () => {
+		if (selectable === null) return;
+		onnodeclicked?.(selectable);
+	};
 
 	const createPath = (nodes: ComputedNode<TValue>[]) => {
 		let instructions = [];
@@ -41,7 +101,7 @@
 		for (let i = 0; i < nodes.length; i++) {
 			const node = nodes[i];
 			const next = {
-				x: i >= nodes.length - 1 ? graphLeft : getGraphX(nodes[i + 1].x),
+				x: i >= nodes.length - 1 ? graphRight : getGraphX(nodes[i + 1].x),
 				y: getGraphY(node.y)
 			};
 
@@ -75,10 +135,17 @@
 			</div>
 		{/each}
 	</div>
-	<svg viewBox="0 0 {viewBoxWidth} {viewBoxHeight}">
+	<svg
+		class:selectable
+		viewBox="0 0 {viewBoxWidth} {viewBoxHeight}"
+		onmousedown={handleClick}
+		onmousemove={handleMouseMove}
+		role="presentation"
+		bind:this={graphicElement}
+	>
 		<!-- <rect x={graphX} y={graphY} width={graphWidth} height={graphHeight} /> -->
 		<line class="stroked" x1={graphX} y1={graphY} x2={graphX} y2={graphBottom} />
-		<line class="stroked" x1={graphX} y1={graphBottom} x2={graphLeft} y2={graphBottom} />
+		<line class="stroked" x1={graphX} y1={graphBottom} x2={graphRight} y2={graphBottom} />
 
 		{#each lines as line}
 			<g class={[line.color]}>
@@ -90,23 +157,20 @@
 					stroke-width="1"
 				/>
 
-				<!-- {#each line.nodes as node}
-						<circle
+				{#each line.nodes as node}
+					<circle
 						class="node"
 						cx={getGraphX(node.x)}
 						cy={getGraphY(node.y)}
 						r="2"
-						onclick={() => onnodeclicked?.(node.value)}
-						onkeydown={(evt) =>
-						evt.key !== 'Space' || !onnodeclicked || onnodeclicked?.(node.value)}
 						role="button"
 						tabindex="0"
-						/>
-						{/each} -->
+					/>
+				{/each}
 			</g>
 		{/each}
 
-		{#each labels.x as label}
+		{#each x.labels as label}
 			{@const x = getGraphX(label.proportion)}
 			{@const y = graphBottom}
 			<line class="stroked" x1={x} y1={y - 2} x2={x} y2={y + 4} stroke-width="1" />
@@ -123,7 +187,7 @@
 			</text>
 		{/each}
 
-		{#each labels.y as label}
+		{#each y.labels as label}
 			{@const x = graphX}
 			{@const y = getGraphY(label.proportion)}
 			<line class="stroked" x1={x - 4} y1={y} x2={x + 2} y2={y} stroke-width="1" />
@@ -140,6 +204,29 @@
 			</text>
 			<!-- <circle class="node" cx={graphX} cy={getGraphY(label.proportion)} r="2" /> -->
 		{/each}
+
+		{#if marker.visible}
+			<line
+				class="marker"
+				class:selectable
+				x1={marker.x}
+				y1={graphBottom}
+				x2={marker.x}
+				y2={graphY}
+				stroke-width="1"
+				stroke-dasharray={selectable != null ? '0' : '2 3'}
+			/>
+
+			<text
+				class="label"
+				x={marker.x + (marker.offset ? -8 : 8)}
+				y={graphY + 20}
+				text-anchor={marker.offset ? 'end' : 'start'}
+				dominant-baseline="middle"
+			>
+				{marker.label}
+			</text>
+		{/if}
 	</svg>
 </div>
 
@@ -193,6 +280,10 @@
 		stroke: var(--color-graphics);
 	}
 
+	svg.selectable {
+		cursor: pointer;
+	}
+
 	.node {
 		cursor: pointer;
 		fill: var(--color-graphics);
@@ -202,5 +293,10 @@
 		fill: var(--color-graphics);
 		font-size: 8pt;
 		// font-family: cursive;
+	}
+
+	.marker {
+		stroke: var(--color-graphics);
+		opacity: 0.6;
 	}
 </style>
