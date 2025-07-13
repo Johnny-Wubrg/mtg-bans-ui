@@ -11,7 +11,9 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 
-	let { children } = $props();
+	let { children, data } = $props();
+
+	const mainMenu = data.mainMenu;
 
 	const maintenance = $derived($page.url && getMaintenance());
 </script>
@@ -19,7 +21,7 @@
 <svelte:head><SiteMeta /></svelte:head>
 
 <div class="app">
-	<AppHeader />
+	<AppHeader menu={mainMenu} />
 
 	{#if browser 
 		&& (maintenance.status === 'scheduled' 

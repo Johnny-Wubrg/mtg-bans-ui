@@ -13,21 +13,25 @@
 	}
 
 	const { cards, classified = false }: Props = $props();
-	const classifiedCards = !classified
-		? {}
-		: cards.reduce<Record<string, Stuff>>((a, c) => {
-				if (!c.classification) return a;
+	const classifiedCards = $derived(
+		!classified
+			? {}
+			: cards.reduce<Record<string, Stuff>>((a, c) => {
+					if (!c.classification) return a;
 
-				a[c.classification.displayOrder] = a[c.classification.displayOrder] ?? {
-					classification: c.classification,
-					cards: []
-				};
-				a[c.classification.displayOrder].cards.push(c);
+					a[c.classification.displayOrder] = a[c.classification.displayOrder] ?? {
+						classification: c.classification,
+						cards: []
+					};
+					a[c.classification.displayOrder].cards.push(c);
 
-				return a;
-			}, {});
+					return a;
+				}, {})
+	);
 
-	const remainingCards = classified ? cards.filter((e) => e.classification == null) : cards;
+	const remainingCards = $derived(
+		classified ? cards.filter((e) => e.classification == null) : cards
+	);
 
 	const getColumns = (count: number) => (count > 14 ? 3 : 1);
 </script>

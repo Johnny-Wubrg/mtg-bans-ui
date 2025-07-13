@@ -1,3 +1,5 @@
+import type { GraphColor } from './Graphics';
+
 export interface Card {
 	scryfallId: string;
 	name: string;
@@ -18,5 +20,6 @@ export interface FormatBans {
 
 export interface FormatBansLimitation {
 	status: string;
+	color?: GraphColor;
 	cards: Card[];
 }

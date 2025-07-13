@@ -2,18 +2,16 @@
 	import Wordmark from './Wordmark.svelte';
 
 	import { getMaintenance } from '$lib/utils/maintenance';
+	import type { MenuLink } from '$lib/utils/menus';
+	import AppMenu from './AppMenu.svelte';
 
 	const maintenance = getMaintenance();
 
-	interface Navlink {
-		href: string;
-		label: string;
+	interface Props {
+		menu: MenuLink[];
 	}
 
-	const navlinks: Navlink[] = [
-		{ href: '/banlist', label: 'Banlist' },
-		{ href: '/contact', label: 'Contact' }
-	];
+	const { menu }: Props = $props();
 </script>
 
 <header>
@@ -21,15 +19,7 @@
 		<Wordmark />
 	</a>
 	{#if maintenance.status !== 'active'}
-		<nav>
-			{#each navlinks as navlink}
-				<a href={navlink.href} class="nav-link">
-					<div class="nav-control">
-						{navlink.label}
-					</div>
-				</a>&nbsp;
-			{/each}
-		</nav>
+		<AppMenu {menu} />
 	{/if}
 </header>
 
@@ -53,18 +43,5 @@
 		display: block;
 		text-decoration: none;
 		text-align: center;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-
-		@include breakpoints.large {
-			justify-content: start;
-		}
-	}
-
-	.nav-control {
-		padding: 1em;
 	}
 </style>
