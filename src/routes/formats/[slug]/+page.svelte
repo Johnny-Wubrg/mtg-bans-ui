@@ -79,7 +79,7 @@
 	);
 
 	const xMin = $derived(
-		new Date(Math.min(...format.events.map((e) => new Date(e.dateEffective).valueOf())))
+		new Date(Math.min(...format.events.map((e) => convertDate(new Date(e.dateEffective)).valueOf())))
 	);
 	const xMax = new Date();
 
