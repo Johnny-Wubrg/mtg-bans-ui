@@ -45,7 +45,11 @@
 		offset: false
 	});
 
-	const handleMouseMove = (evt: MouseEvent) => {
+	const isMouseEvent = (evt: PointerEvent) =>
+		evt.pointerType === 'mouse' || (evt.pointerType === undefined && evt.type.startsWith('mouse'));
+
+	const handleMouseMove = (evt: PointerEvent) => {
+		if (!isMouseEvent(evt)) return true;
 		const { clientX, clientY } = evt;
 		const rect = graphicElement.getBoundingClientRect();
 		const effectiveX = ((clientX - rect.left) / rect.width) * viewBoxWidth;
@@ -90,8 +94,8 @@
 		marker.offset = target > 0.5;
 	};
 
-	const handleClick = () => {
-		if (selectable === null) return;
+	const handleClick = (evt: PointerEvent) => {
+		if (!isMouseEvent(evt) || selectable === null) return true;
 		onnodeclicked?.(selectable);
 	};
 
@@ -138,8 +142,8 @@
 	<svg
 		class:selectable
 		viewBox="0 0 {viewBoxWidth} {viewBoxHeight}"
-		onmousedown={handleClick}
-		onmousemove={handleMouseMove}
+		onpointerdown={handleClick}
+		onpointermove={handleMouseMove}
 		role="presentation"
 		bind:this={graphicElement}
 	>
