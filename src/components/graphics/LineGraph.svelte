@@ -225,8 +225,6 @@
 						cx={getGraphX(node.x)}
 						cy={getGraphY(node.y)}
 						r="2"
-						role="button"
-						tabindex="0"
 					/>
 				{/each}
 			</g>
