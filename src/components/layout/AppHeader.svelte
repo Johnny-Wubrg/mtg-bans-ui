@@ -38,15 +38,16 @@
 	@use '@scissors/breakpoints';
 
 	header {
+		gap: 1em;
 		padding: 1em;
 		text-align: center;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
 		@include breakpoints.large {
 			max-width: 1200px;
 			margin: auto;
 			padding: 1em 0;
+			justify-content: space-between;
 		}
 	}
 

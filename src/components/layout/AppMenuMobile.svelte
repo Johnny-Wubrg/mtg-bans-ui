@@ -42,7 +42,7 @@
 		top: 0;
 		left: 0;
 		bottom: 0;
-		right: 30%;
+		right: 4em;
 		text-align: left;
 		&-close {
 			width: 100%;
