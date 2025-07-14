@@ -29,11 +29,11 @@
 	@use '@scissors/breakpoints';
 
 	.nav {
-		display: flex;
-		justify-content: center;
+		display: none;
+		justify-content: start;
 
 		@include breakpoints.large {
-			justify-content: start;
+			display: flex;
 		}
 
 		&-item {
@@ -60,12 +60,12 @@
 			background: var(--color-dark-gray);
 			text-align: left;
 			list-style-type: none;
-      &-link {
+			&-link {
 				color: var(--color-white);
 				display: block;
-        line-height: 1;
-        padding: 0.75em 1em;
-      }
+				line-height: 1;
+				padding: 0.75em 1em;
+			}
 		}
 	}
 </style>

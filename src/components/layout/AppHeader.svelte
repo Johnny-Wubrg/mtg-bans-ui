@@ -4,6 +4,7 @@
 	import { getMaintenance } from '$lib/utils/maintenance';
 	import type { MenuLink } from '$lib/utils/menus';
 	import AppMenu from './AppMenu.svelte';
+	import AppMenuMobile from './AppMenuMobile.svelte';
 
 	const maintenance = getMaintenance();
 
@@ -12,9 +13,19 @@
 	}
 
 	const { menu }: Props = $props();
+
+	let open = $state(false);
+
+	const toggleMenu = () => {
+		open = !open;
+	};
 </script>
 
 <header>
+	{#if maintenance.status !== 'active'}
+		<button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">☰</button>
+		<AppMenuMobile {menu} {open} onNavigated={() => (open = false)} />
+	{/if}
 	<a href="/" class="brand-link">
 		<Wordmark />
 	</a>
@@ -29,10 +40,10 @@
 	header {
 		padding: 1em;
 		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		@include breakpoints.large {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
 			max-width: 1200px;
 			margin: auto;
 			padding: 1em 0;
@@ -43,5 +54,11 @@
 		display: block;
 		text-decoration: none;
 		text-align: center;
+	}
+
+	.menu-toggle {
+		@include breakpoints.large {
+			display: none;
+		}
 	}
 </style>
