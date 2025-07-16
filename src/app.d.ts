@@ -1,5 +1,10 @@
-// See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
+// Alternative approach using module augmentation for more specific form attributes
+declare module 'svelte/elements' {
+  interface HTMLFormAttributes {
+    'netlify-honeypot'?: string;
+  }
+}
+
 declare global {
 	namespace App {
 		// interface Error {}
