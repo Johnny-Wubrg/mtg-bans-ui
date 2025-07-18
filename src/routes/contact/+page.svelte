@@ -2,6 +2,15 @@
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import { goto } from '$app/navigation';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import type { PageData } from './$types';
+
+	interface Props {
+		data: PageData;
+	}
+
+	const { data }:Props = $props();
+
+	let reason = $state(data.reason);
 
 	interface ReasonDefinition {
 		label: string;
@@ -33,7 +42,6 @@
 			alert('There was a problem submitting the form. Please try again later.');
 		}
 	};
-
 </script>
 
 <svelte:head>
@@ -48,13 +56,14 @@
 	method="POST"
 	data-netlify="true"
 	netlify-honeypot="bot-field"
-	onsubmit={(evt) => handleSubmit(evt)}>
+	onsubmit={(evt) => handleSubmit(evt)}
+>
 	<input type="hidden" name="form-name" value="mtg-bans-contact" />
 	<div class="field">
 		<label for="contact-subject">Subject</label>
-		<select name="subject" id="contact-subject" required>
-			{#each Object.entries(reasons) as [id, reason]}
-				<option value={id}>{reason.label}</option>
+		<select name="subject" id="contact-subject" required bind:value={reason}>
+			{#each Object.entries(reasons) as [id, r]}
+				<option value={id}>{r.label}</option>
 			{/each}
 		</select>
 	</div>
@@ -78,25 +87,28 @@
 </form>
 
 <style>
-  .field {
-    margin: 2em 0;
+	.field {
+		margin: 2em 0;
 
-    label {
-      margin-bottom: 0.25em;
-    }
+		label {
+			margin-bottom: 0.25em;
+		}
 
-    label, select, input, textarea {
-      display: block;
-      width: 100%;
-    }
+		label,
+		select,
+		input,
+		textarea {
+			display: block;
+			width: 100%;
+		}
 
-    option {
-      color: var(--color-black);
-    }
+		option {
+			color: var(--color-black);
+		}
 
-    textarea {
-      resize: vertical;
-      min-height: 8em;
-    }
-  }
+		textarea {
+			resize: vertical;
+			min-height: 8em;
+		}
+	}
 </style>
