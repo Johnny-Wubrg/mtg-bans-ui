@@ -56,7 +56,7 @@
 				<ul>
 					{#each announcement.sources as src}
 						<li>
-							<a href={src}>{src}</a>
+							<a href={src.uri}>{src.title}</a>
 						</li>
 					{/each}
 				</ul>
