@@ -1,4 +1,6 @@
-# sv
+# MTGBans.info UI Application
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/594c8a96-04af-42ea-be7f-5dcd73a4ab63/deploy-status)](https://app.netlify.com/projects/mtgbans/deploys)
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 

@@ -13,10 +13,11 @@
 		align-items: baseline;
     justify-content: center;
     font-family: var(--font-primary);
-    font-size: 2.5em;
     font-weight: normal;
-
+    font-size: 2em;
+    
     @include breakpoints.large {
+      font-size: 2.5em;
       justify-content: start;
     }
 
