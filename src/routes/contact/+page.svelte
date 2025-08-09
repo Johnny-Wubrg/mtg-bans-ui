@@ -2,15 +2,9 @@
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import { goto } from '$app/navigation';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
-	import type { PageData } from './$types';
+	import { onMount } from 'svelte';
 
-	interface Props {
-		data: PageData;
-	}
-
-	const { data }:Props = $props();
-
-	let reason = $state(data.reason);
+	let reason = $state('general');
 
 	interface ReasonDefinition {
 		label: string;
@@ -21,6 +15,19 @@
 		correction: { label: 'Submit a Correction or Citation' },
 		bug: { label: 'Report a Bug' }
 	};
+
+	onMount(() => {
+		const hash = window.location.hash.replace(/^#/, '').toLowerCase();
+		console.log(hash);
+
+		if (hash && reasons[hash]) {
+			reason = hash;
+		}
+
+		if (window.location.hash) {
+			history.replaceState(null, '', window.location.pathname + window.location.search);
+		}
+	});
 
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
@@ -89,11 +96,9 @@
 <style>
 	.field {
 		margin: 2em 0;
-
 		label {
 			margin-bottom: 0.25em;
 		}
-
 		label,
 		select,
 		input,
@@ -101,11 +106,9 @@
 			display: block;
 			width: 100%;
 		}
-
 		option {
 			color: var(--color-black);
 		}
-
 		textarea {
 			resize: vertical;
 			min-height: 8em;

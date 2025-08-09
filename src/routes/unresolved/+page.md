@@ -10,7 +10,7 @@ import PageTitle from '../../components/layout/PageTitle.svelte';
 <PageTitle>Help Wanted</PageTitle>
 
 The data on this website is incomplete! There are a number of bannings that are missing a proper source. If you have any
-additional information on the announcements listed below, please [reach out](/contact?reason=correction).
+additional information on the announcements listed below, please [reach out](/contact#correction).
 
 - Much of early MTG history appear to be lost. Many of the early bannings are pieced together from
   an [archived card rules document from 2000](https://web.archive.org/web/20001212180600/http://www.activesw.com/~sdangelo/magic/rule-cards.html).
