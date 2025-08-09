@@ -80,7 +80,7 @@
 
 	<div class="field">
 		<label for="comments">Comments</label>
-		<textarea id="comments" required></textarea>
+		<textarea id="comments" name="contact-comments" required></textarea>
 	</div>
 
 	<button>Submit</button>
