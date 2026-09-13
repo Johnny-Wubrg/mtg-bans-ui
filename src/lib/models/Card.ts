@@ -6,11 +6,35 @@ export interface Card {
 	scryfallImageUri: string;
 	scryfallUri: string;
 	classification: Classification;
+	formatStatuses: CardFormatStatus[] | null;
+	legalityEvents: CardLegalityEvent[] | null;
 }
 
 export interface Classification {
 	displayOrder: number;
 	summary: string;
+}
+
+export type CardFormatStatusType =
+	| 'NeverBanned'
+	| 'Limitation'
+	| 'Rotated'
+	| 'NotLegal'
+	| 'Unbanned';
+
+export interface CardFormatStatus {
+	format: string;
+	type: CardFormatStatusType;
+	status: string | null;
+	color: GraphColor | null;
+	date: string | null;
+}
+
+export interface CardLegalityEvent {
+	format: string | null;
+	status: string;
+	color: GraphColor;
+	date: string;
 }
 
 export interface FormatBans {
