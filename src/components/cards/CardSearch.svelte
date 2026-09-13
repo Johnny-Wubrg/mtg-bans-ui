@@ -86,63 +86,78 @@
 <svelte:window onclick={handleWindowClick} />
 
 <div class="search" bind:this={container}>
-	<input
-		type="text"
-		placeholder="Search for a card..."
-		bind:value={query}
-		oninput={handleInput}
-		onkeydown={handleKeydown}
-		onfocus={() => (open = query.trim().length > 0)}
-	/>
+	<div class="search-container">
+		<input
+			type="text"
+			placeholder="Search for a card..."
+			bind:value={query}
+			oninput={handleInput}
+			onkeydown={handleKeydown}
+			onfocus={() => (open = query.trim().length > 0)}
+		/>
 
-	{#if open}
-		<ul class="results">
-			{#if loading}
-				<li class="message">Searching...</li>
-			{:else if !results.length}
-				<li class="message">No cards found.</li>
-			{:else}
-				{#each results as result, i (result.scryfallId)}
-					<li>
-						{#if result.known}
-							<a
-								href={`/cards/${result.scryfallId}`}
-								class="row"
-								class:highlighted={i === highlightedIndex}
-								bind:this={rowElements[i]}
-								onmouseenter={() => (highlightedIndex = i)}
-								onclick={() => (open = false)}
-							>
-								<img src={result.scryfallImageUri} alt={result.name} />
-								<span class="name">{result.name}</span>
-							</a>
-						{:else}
-							<div
-								class="row unknown"
-								class:highlighted={i === highlightedIndex}
-								bind:this={rowElements[i]}
-								onmouseenter={() => (highlightedIndex = i)}
-								role="presentation"
-							>
-								<img src={result.scryfallImageUri} alt={result.name} />
-								<span class="name">{result.name}</span>
-								<span class="label">No banning records</span>
-							</div>
-						{/if}
-					</li>
-				{/each}
-			{/if}
-		</ul>
-	{/if}
+		{#if open}
+			<ul class="results">
+				{#if loading}
+					<li class="message">Searching...</li>
+				{:else if !results.length}
+					<li class="message">No cards found.</li>
+				{:else}
+					{#each results as result, i (result.scryfallId)}
+						<li>
+							{#if result.known}
+								<a
+									href={`/cards/${result.scryfallId}`}
+									class="row"
+									class:highlighted={i === highlightedIndex}
+									bind:this={rowElements[i]}
+									onmouseenter={() => (highlightedIndex = i)}
+									onclick={() => (open = false)}
+								>
+									<img src={result.scryfallImageUri} alt={result.name} />
+									<span class="name">{result.name}</span>
+								</a>
+							{:else}
+								<div
+									class="row unknown"
+									class:highlighted={i === highlightedIndex}
+									bind:this={rowElements[i]}
+									onmouseenter={() => (highlightedIndex = i)}
+									role="presentation"
+								>
+									<img src={result.scryfallImageUri} alt={result.name} />
+									<span class="name">{result.name}</span>
+									<span class="label">No banning records</span>
+								</div>
+							{/if}
+						</li>
+					{/each}
+				{/if}
+			</ul>
+		{/if}
+	</div>
+
+	<p class="footnote">
+		Search is powered by <a href="https://scryfall.com/">Scryfall</a>.
+		<a href="https://scryfall.com/docs/syntax">Search syntax</a> is supported.
+	</p>
 </div>
 
 <style lang="scss">
 	@use '@scissors/media';
 
 	.search {
-		position: relative;
 		max-width: 30em;
 		margin: 0 auto 2em;
+		&-container {
+			position: relative;
+		}
+		.footnote {
+			margin: 0;
+			font-size: 0.75em;
+			text-align: right;
+			font-style: italic;
+		}
 	}
 
 	input {
@@ -190,7 +205,7 @@
 			width: 2.5em;
 			border-radius: 0.25em;
 			flex-shrink: 0;
-			aspect-ratio: 5 / 7 ;
+			aspect-ratio: 5 / 7;
 		}
 
 		.name {
