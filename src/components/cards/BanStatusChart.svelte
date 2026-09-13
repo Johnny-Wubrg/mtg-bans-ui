@@ -20,7 +20,7 @@
 							date={status.date!}
 						/>
 					{:else if status.type === 'Rotated'}
-						Rotated since <FormattedDate date={status.date!} />
+						Rotated out on <FormattedDate date={status.date!} />
 					{:else if status.type === 'Unbanned'}
 						Unbanned since <FormattedDate date={status.date!} />
 					{:else if status.type === 'NotLegal'}
