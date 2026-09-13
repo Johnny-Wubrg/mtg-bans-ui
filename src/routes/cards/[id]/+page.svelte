@@ -2,6 +2,7 @@
 	import type { Card } from '$lib/models/Card';
 	import { trackCustomEvent } from '$lib/utils/tracking';
 	import BanStatusChart from '../../../components/cards/BanStatusChart.svelte';
+	import LegalityTimeline from '../../../components/cards/LegalityTimeline.svelte';
 	import PageTitle from '../../../components/layout/PageTitle.svelte';
 
 	interface PageData {
@@ -36,6 +37,11 @@
 	{/if}
 </div>
 
+{#if card.legalityEvents?.length}
+	<h2>Timeline</h2>
+	<LegalityTimeline events={card.legalityEvents} />
+{/if}
+
 <style lang="scss">
 	.intro {
 		display: flex;
@@ -53,9 +59,9 @@
 	}
 
 	.statuses {
-	h2 {
-	margin-top: 0;
-	}
-	  flex: 1 0 0;
+		flex: 1 0 0;
+		h2 {
+			margin-top: 0;
+		}
 	}
 </style>

@@ -7,6 +7,7 @@ export interface Card {
 	scryfallUri: string;
 	classification: Classification;
 	formatStatuses: CardFormatStatus[] | null;
+	legalityEvents: CardLegalityEvent[] | null;
 }
 
 export interface Classification {
@@ -27,6 +28,13 @@ export interface CardFormatStatus {
 	status: string | null;
 	color: GraphColor | null;
 	date: string | null;
+}
+
+export interface CardLegalityEvent {
+	format: string | null;
+	status: string;
+	color: GraphColor;
+	date: string;
 }
 
 export interface FormatBans {
