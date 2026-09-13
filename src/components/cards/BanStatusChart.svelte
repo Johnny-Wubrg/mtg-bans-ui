@@ -16,11 +16,13 @@
 				<th>{status.format}</th>
 				<td>
 					{#if status.type === 'Limitation'}
-						<span class={status.color}>{status.status}</span>
+						<span class={status.color}>{status.status}</span> since <FormattedDate
+							date={status.date!}
+						/>
 					{:else if status.type === 'Rotated'}
-						Rotated Since <FormattedDate date={status.date!} />
+						Rotated since <FormattedDate date={status.date!} />
 					{:else if status.type === 'Unbanned'}
-						Unbanned Since <FormattedDate date={status.date!} />
+						Unbanned since <FormattedDate date={status.date!} />
 					{:else if status.type === 'NotLegal'}
 						Not Legal
 					{:else if status.format === 'Pauper'}
