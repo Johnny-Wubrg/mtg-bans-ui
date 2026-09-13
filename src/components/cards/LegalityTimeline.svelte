@@ -53,16 +53,17 @@
 </ul>
 
 <style lang="scss">
+	@use '@scissors/breakpoints';
 	.pills {
-		display: flex;
-		flex-wrap: wrap;
+		text-align: center;
 		font-size: 0.875em;
-		gap: 0.5em;
 		margin-bottom: 1em;
 
 		button {
+			display: inline-block;
 			border-radius: 999px;
 			padding: 0.35em 1em;
+			margin: 0.5em;
 			background: transparent;
 			color: var(--color-text);
 
@@ -71,6 +72,10 @@
 				color: var(--color-white);
 				border-color: var(--color-dark-gray);
 			}
+		}
+
+		@include breakpoints.large {
+			text-align: left;
 		}
 	}
 

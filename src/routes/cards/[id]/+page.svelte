@@ -43,9 +43,13 @@
 {/if}
 
 <style lang="scss">
+	@use '@scissors/breakpoints';
+
 	.intro {
-		display: flex;
-		gap: 2em;
+		@include breakpoints.large {
+			display: flex;
+			gap: 2em;
+		}
 	}
 
 	.card {
