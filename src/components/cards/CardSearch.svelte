@@ -7,6 +7,8 @@
 
 	let query = $state('');
 	let results = $state<CardSearchResult[]>([]);
+	let hasMore = $state(false);
+	let showUnknown = $state(true);
 	let open = $state(false);
 	let loading = $state(false);
 	let highlightedIndex = $state(0);
@@ -15,6 +17,8 @@
 
 	let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 	let requestId = 0;
+
+	const visibleResults = $derived(showUnknown ? results : results.filter((r) => r.known));
 
 	$effect(() => {
 		rowElements[highlightedIndex]?.scrollIntoView({ block: 'nearest' });
@@ -25,11 +29,12 @@
 		loading = true;
 		open = true;
 
-		const searchResults = await searchCards(term);
+		const response = await searchCards(term);
 
 		if (id !== requestId) return;
 
-		results = searchResults;
+		results = response.results;
+		hasMore = response.hasMore;
 		highlightedIndex = 0;
 		loading = false;
 
@@ -44,6 +49,7 @@
 		if (!term) {
 			requestId++;
 			results = [];
+			hasMore = false;
 			open = false;
 			loading = false;
 			return;
@@ -64,17 +70,17 @@
 			return;
 		}
 
-		if (!open || !results.length) return;
+		if (!open || !visibleResults.length) return;
 
 		if (evt.key === 'ArrowDown') {
 			evt.preventDefault();
-			highlightedIndex = Math.min(highlightedIndex + 1, results.length - 1);
+			highlightedIndex = Math.min(highlightedIndex + 1, visibleResults.length - 1);
 		} else if (evt.key === 'ArrowUp') {
 			evt.preventDefault();
 			highlightedIndex = Math.max(highlightedIndex - 1, 0);
 		} else if (evt.key === 'Enter') {
 			evt.preventDefault();
-			goToResult(results[highlightedIndex]);
+			goToResult(visibleResults[highlightedIndex]);
 		}
 	};
 
@@ -98,12 +104,28 @@
 
 		{#if open}
 			<ul class="results">
+				<li class="toggle">
+					<label>
+						<input
+							type="checkbox"
+							bind:checked={showUnknown}
+							onchange={() => (highlightedIndex = 0)}
+						/>
+						Show all cards
+					</label>
+				</li>
 				{#if loading}
 					<li class="message">Searching...</li>
-				{:else if !results.length}
-					<li class="message">No cards found.</li>
+				{:else if !visibleResults.length}
+					{#if hasMore}
+						<li class="message">
+							No cards found. Narrow your search to see more specific results.
+						</li>
+					{:else}
+						<li class="message">No cards found.</li>
+					{/if}
 				{:else}
-					{#each results as result, i (result.scryfallId)}
+					{#each visibleResults as result, i (result.scryfallId)}
 						<li>
 							{#if result.known}
 								<a
@@ -132,6 +154,9 @@
 							{/if}
 						</li>
 					{/each}
+					{#if hasMore}
+						<li class="message hint">Narrow your search to see more specific results.</li>
+					{/if}
 				{/if}
 			</ul>
 		{/if}
@@ -160,7 +185,7 @@
 		}
 	}
 
-	input {
+	input[type='text'] {
 		width: 100%;
 	}
 
@@ -182,6 +207,25 @@
 	.message {
 		padding: 0.5em 1em;
 		color: var(--color-text);
+
+		&.hint {
+			padding: 1em;
+			font-size: 0.875em;
+			font-style: italic;
+		}
+	}
+
+	.toggle {
+		padding: 0.5em 1em;
+		border-bottom: 1px solid var(--color-border);
+		font-size: 0.875em;
+
+		label {
+			display: flex;
+			align-items: center;
+			gap: 0.5em;
+			cursor: pointer;
+		}
 	}
 
 	.row {

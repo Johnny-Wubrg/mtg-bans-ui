@@ -4,6 +4,6 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ url }) => {
 	const query = url.searchParams.get('q') ?? '';
-	const results = await searchCards(query);
-	return json(results ?? []);
+	const response = await searchCards(query);
+	return json(response ?? { results: [], hasMore: false });
 };

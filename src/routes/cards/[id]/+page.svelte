@@ -53,11 +53,15 @@
 	}
 
 	.card {
-		flex: 0 0 30%;
 		text-align: center;
+		@include breakpoints.large {
+		  flex: 0 0 30%;
+		}
 		img {
 			display: block;
 			width: 100%;
+			max-width: 20em;
+			margin: auto;
 			border-radius: 1em;
 		}
 	}

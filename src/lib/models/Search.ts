@@ -4,3 +4,8 @@ export interface CardSearchResult {
 	scryfallImageUri: string | null;
 	known: boolean;
 }
+
+export interface CardSearchResponse {
+	results: CardSearchResult[];
+	hasMore: boolean;
+}
