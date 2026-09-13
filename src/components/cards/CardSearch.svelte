@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { searchCards } from '$lib/api/search';
 	import type { CardSearchResult } from '$lib/models/Search';
+	import { trackCustomEvent } from '$lib/utils/tracking';
+	import { tick } from 'svelte';
 
 	let query = $state('');
 	let results = $state<CardSearchResult[]>([]);
@@ -30,6 +32,9 @@
 		results = searchResults;
 		highlightedIndex = 0;
 		loading = false;
+
+		await tick();
+		trackCustomEvent('Card Searched', { query: term });
 	};
 
 	const handleInput = () => {
@@ -183,11 +188,9 @@
 
 		img {
 			width: 2.5em;
-			height: 2.5em;
-			object-fit: cover;
-			object-position: top;
 			border-radius: 0.25em;
 			flex-shrink: 0;
+			aspect-ratio: 5 / 7 ;
 		}
 
 		.name {
