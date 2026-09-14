@@ -2,6 +2,7 @@
 	import type { Card } from '$lib/models/Card';
 	import { trackCustomEvent } from '$lib/utils/tracking';
 	import BanStatusChart from '../../../components/cards/BanStatusChart.svelte';
+	import CardRationale from '../../../components/cards/CardRationale.svelte';
 	import LegalityTimeline from '../../../components/cards/LegalityTimeline.svelte';
 	import PageTitle from '../../../components/layout/PageTitle.svelte';
 
@@ -42,6 +43,11 @@
 	<LegalityTimeline events={card.legalityEvents} />
 {/if}
 
+{#if card.rationale}
+	<h2>Rationale</h2>
+	<CardRationale rationale={card.rationale} />
+{/if}
+
 <style lang="scss">
 	@use '@scissors/breakpoints';
 
@@ -55,7 +61,7 @@
 	.card {
 		text-align: center;
 		@include breakpoints.large {
-		  flex: 0 0 30%;
+			flex: 0 0 30%;
 		}
 		img {
 			display: block;
