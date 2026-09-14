@@ -1,12 +1,25 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import CardSearch from '../components/cards/CardSearch.svelte';
+	import LatestAnnouncementBanner from '../components/announcements/LatestAnnouncementBanner.svelte';
 	import PageTitle from '../components/layout/PageTitle.svelte';
+	import type { PageData } from './$types';
+
+	interface Props {
+		data: PageData;
+	}
+
+	const { data }: Props = $props();
+	const latestAnnouncement = $derived(data.latestAnnouncement);
 </script>
 
 <svelte:head>
 	<title>Welcome to {PUBLIC_APP_NAME}</title>
 </svelte:head>
+
+{#if latestAnnouncement}
+	<LatestAnnouncementBanner announcement={latestAnnouncement} />
+{/if}
 
 <section>
 	<PageTitle>Hello world!</PageTitle>

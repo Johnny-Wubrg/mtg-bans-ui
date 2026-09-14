@@ -5,6 +5,7 @@ export interface Announcement {
 	id: number;
 	dateAnnounced: string;
 	dateEffective: string;
+	dateNextProjected: string;
 	summary: string;
 	sources: Publication[];
 	changesets: AnnouncementFormat[];

@@ -34,9 +34,18 @@ AI is given a strict, narrow set of rules for every card:
 - Only use the announcements provided for this card. Don't bring in outside knowledge.
 - Stay focused on the named card. Other cards are mentioned only if they directly affected its
   status.
+- Don't restate the ban and restriction history — that's already shown above the paragraph.
+  Explain the reasoning behind it instead.
+- Don't describe what the card does on the battlefield. Only its banning rationale matters.
+- Only reason about Standard, Pioneer, Modern, Legacy, Vintage, Commander, Pauper, and Extended.
+  Other formats aren't factored in.
 - Write one plain paragraph, in a neutral, encyclopedic tone. No filler, no hedging, no phrases
   like "this summary" or "here is."
 - If the announcements don't clearly explain the reasoning, say so rather than guessing.
+
+The AI is also shown a handful of worked examples pairing an overly verbose draft with the
+tighter version we actually want, so it has something concrete to calibrate against beyond the
+rules above.
 
 The goal is a consistent, factual paragraph that reads like the rest of the site, not something
 that sounds like it came from a chatbot.
