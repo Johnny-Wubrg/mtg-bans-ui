@@ -45,7 +45,7 @@
 
 {#if card.rationale}
 	<h2>Rationale</h2>
-	<CardRationale rationale={card.rationale} />
+	<CardRationale scryfallId={card.scryfallId} rationale={card.rationale} />
 {/if}
 
 <style lang="scss">
