@@ -1,6 +1,7 @@
 <script>
 import { PUBLIC_APP_NAME } from '$env/static/public';
 import PageTitle from '../../components/layout/PageTitle.svelte';
+import RationaleFeedbackPreference from '../../components/cards/RationaleFeedbackPreference.svelte';
 </script>
 
 <svelte:head>
@@ -46,6 +47,21 @@ An AI-written paragraph is a draft, not a final word. A human editor reads it, c
 the source announcements, and either approves it as-is or rewrites it. The note under the
 paragraph always tells you which model wrote the draft, when it was last updated, and whether it
 has been reviewed and approved yet.
+
+## Help us review
+
+Rationales that haven't been approved yet show a small prompt underneath the paragraph asking
+whether it looks accurate:
+
+- **Yes** or **No** casts a quick, anonymous vote. Votes help prioritize which drafts a human
+  editor looks at first — ones flagged as inaccurate move to the front of the line.
+- **Submit a Correction** takes you to the contact form if you'd like to explain what's wrong.
+- **Don't ask me again** hides the prompt going forward. That preference is saved only in your
+  browser and is never sent to us.
+
+No account or personal information is involved in voting.
+
+<RationaleFeedbackPreference />
 
 ## Questions or corrections
 

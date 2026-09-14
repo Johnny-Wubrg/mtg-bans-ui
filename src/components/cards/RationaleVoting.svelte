@@ -1,7 +1,9 @@
 <script lang="ts">
+	import {
+		isRationaleFeedbackHidden,
+		setRationaleFeedbackHidden
+	} from '$lib/utils/rationaleFeedback';
 	import { onMount } from 'svelte';
-
-	const HIDE_KEY = 'mtgbans:hideRationaleVoting';
 
 	interface Props {
 		scryfallId: string;
@@ -13,7 +15,7 @@
 	let voted = $state(false);
 
 	onMount(() => {
-		hidden = localStorage.getItem(HIDE_KEY) === 'true';
+		hidden = isRationaleFeedbackHidden();
 	});
 
 	const vote = (direction: 1 | -1) => {
@@ -29,7 +31,7 @@
 	};
 
 	const dismiss = () => {
-		localStorage.setItem(HIDE_KEY, 'true');
+		setRationaleFeedbackHidden(true);
 		hidden = true;
 	};
 </script>
