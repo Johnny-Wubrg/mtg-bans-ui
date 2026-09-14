@@ -8,6 +8,14 @@ export interface Card {
 	classification: Classification;
 	formatStatuses: CardFormatStatus[] | null;
 	legalityEvents: CardLegalityEvent[] | null;
+	rationale: CardRationale | null;
+}
+
+export interface CardRationale {
+	text: string;
+	aiModel: string | null;
+	dateUpdated: string;
+	dateApproved: string | null;
 }
 
 export interface Classification {

@@ -29,10 +29,12 @@ We value your privacy and strive to collect minimal personal data. Here’s how 
    - Our contact form is powered by [Netlify](https://www.netlify.com/), a third-party service provider. Please note:
      - Netlify may collect certain information, such as your IP address, when you submit the form.
      - For more details about Netlify’s practices, please refer to [their privacy policy](https://www.netlify.com/privacy/).
+5. **Rationale Feedback**
+   - Some card pages let you vote on whether an AI-generated rationale looks accurate. These votes are anonymous: we don't store your IP address, browser identity, or any other information about who cast them, just the vote itself and when it was made. [Learn more about how rationales are written.](/ai-rationales)
 
-### Cookies
+### Cookies & Local Storage
 
-There are no cookies on this site -- well, except maybe the occasional gingerbread folk from Eldraine.
+There are no cookies on this site -- well, except maybe the occasional gingerbread folk from Eldraine. If you dismiss the rationale feedback prompt using "Don't ask me again," that preference is saved in your browser's local storage so we don't ask again on that device. It stays on your device and is never sent to us.
 
 ### Summary of Third-Party Services
 
@@ -41,4 +43,4 @@ Below is a recap of third-party services used by this website. For detailed info
 1. **Plausible Analytics** - Privacy-respecting analytics are powered by Plausible. [Here is their data policy.](https://plausible.io/data-policy)
 2. **Netlify Forms** - The contact form is powered by Netlify Forms. For more information, please [review their privacy policy](https://www.netlify.com/privacy/).
 
-_Last Updated: <FormattedDate date="2025-06-12" />_
+_Last Updated: <FormattedDate date="2026-09-13" />_
