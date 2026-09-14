@@ -41,17 +41,30 @@
 </table>
 
 <style lang="scss">
+	@use '@scissors/breakpoints';
+
 	.ban-status {
 		border-collapse: collapse;
+		display: block;
+		margin: 1em 0;
+
+		tbody,
+		tr,
+		th,
+		td {
+			display: block;
+		}
+
+		tr {
+			width: 100%;
+			margin-bottom: 1em;
+		}
 
 		th {
-			text-align: left;
-			font-weight: normal;
-			padding: 0.25em 1em 0.25em 0;
+			font-weight: bold;
 		}
 
 		td {
-			padding: 0.25em 0;
 		}
 
 		.red {
@@ -64,6 +77,30 @@
 
 		.green {
 			color: var(--mtg-green);
+		}
+
+		@include breakpoints.large {
+			display: table;
+
+			tbody {
+				display: table-row-group;
+			}
+
+			tr {
+				display: table-row;
+				margin-bottom: 0;
+			}
+
+			td {
+				display: table-cell;
+				padding: 0.25em 0;
+			}
+
+			th {
+				display: table-cell;
+				text-align: left;
+				padding: 0.25em 1em 0.25em 0;
+			}
 		}
 	}
 </style>

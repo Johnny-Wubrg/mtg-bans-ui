@@ -25,15 +25,20 @@
 <div class="intro">
 	<div class="card">
 		<img src={card.scryfallImageUri} alt={card.name} />
-		<p>
-			<a href={card.scryfallUri} onmousedown={trackVisit} ontouchstart={trackVisit}>
-				View on Scryfall
-			</a>
-		</p>
 	</div>
 	{#if card.formatStatuses}
 		<div class="statuses">
 			<BanStatusChart statuses={card.formatStatuses} />
+			<p>
+				<a
+					class="button"
+					href={card.scryfallUri}
+					onmousedown={trackVisit}
+					ontouchstart={trackVisit}
+				>
+					View on Scryfall
+				</a>
+			</p>
 		</div>
 	{/if}
 </div>
@@ -53,8 +58,11 @@
 
 	.intro {
 		@include breakpoints.large {
+			margin: 4em 0 2em;
 			display: flex;
-			gap: 2em;
+			gap: 3em;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 
@@ -73,9 +81,13 @@
 	}
 
 	.statuses {
-		flex: 1 0 0;
+		text-align: center;
 		h2 {
 			margin-top: 0;
+		}
+		@include breakpoints.large {
+		  text-align: left;
+		  flex: 0 0 auto;
 		}
 	}
 </style>
