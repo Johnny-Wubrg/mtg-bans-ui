@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Announcement } from '$lib/models/Announcement';
 	import type { PageData } from './$types';
 	import FormattedDate from '../../components/FormattedDate.svelte';
@@ -17,6 +18,17 @@
 
 	const { data }: Props = $props();
 	const { announcements }: Data = data;
+
+	onMount(() => {
+		const hash = window.location.hash.replace(/^#/, '');
+		if (!hash) return;
+
+		const target = document.getElementById(hash);
+		if (!target) return;
+
+		target.querySelector('details')?.setAttribute('open', '');
+		target.scrollIntoView();
+	});
 </script>
 
 <svelte:head>
@@ -57,6 +69,9 @@
 					{#each announcement.sources as src}
 						<li>
 							<a href={src.uri}>{src.title}</a>
+							{#if src.hasArchive}
+								<a href="/publications/{src.id}/archive">(View Archived Post)</a>
+							{/if}
 						</li>
 					{/each}
 				</ul>

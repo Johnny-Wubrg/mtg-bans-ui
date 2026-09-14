@@ -43,6 +43,7 @@ export interface CardLegalityEvent {
 	status: string;
 	color: GraphColor;
 	date: string;
+	announcementId: number | null;
 }
 
 export interface FormatBans {
