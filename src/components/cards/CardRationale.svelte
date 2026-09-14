@@ -25,7 +25,7 @@
 				new Date(rationale.dateApproved)
 			)}.
 		{:else}
-			It has not yet been reviewed by a human editor and may be inaccurate.
+			It has not yet been reviewed by a human editor and may contain some inaccuracies.
 		{/if}
 		<a href="/ai-rationales">Learn more.</a>
 	</p>
