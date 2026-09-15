@@ -1,4 +1,10 @@
 export interface Publication {
-  title: string;
-  uri: string;
+	id: number;
+	title: string;
+	uri: string;
+	hasArchive: boolean;
+}
+
+export interface PublicationArchive extends Publication {
+	contentHtml: string | null;
 }
