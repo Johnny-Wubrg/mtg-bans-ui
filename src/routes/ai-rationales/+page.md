@@ -5,7 +5,6 @@ import RationaleFeedbackPreference from '../../components/cards/RationaleFeedbac
 </script>
 
 <svelte:head>
-
 <title>How AI Rationales Are Written | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 
@@ -40,8 +39,9 @@ AI is given a strict, narrow set of rules for every card:
 - Only reason about Standard, Pioneer, Modern, Legacy, Vintage, Commander, Pauper, and Extended.
   Other formats aren't factored in.
 - Write one plain paragraph, in a neutral, encyclopedic tone. No filler, no hedging, no phrases
-  like "this summary" or "here is."
-- If the announcements don't clearly explain the reasoning, say so rather than guessing.
+  like "this summary" or "here is," and no pointing back at the source announcements themselves.
+- If the announcements don't clearly explain the reasoning, skip the card entirely rather than
+  guess.
 
 The AI is also shown a handful of worked examples pairing an overly verbose draft with the
 tighter version we actually want, so it has something concrete to calibrate against beyond the
@@ -49,6 +49,10 @@ rules above.
 
 The goal is a consistent, factual paragraph that reads like the rest of the site, not something
 that sounds like it came from a chatbot.
+
+Because of that last rule, coverage isn't complete. A card without a rationale simply hasn't had
+enough written about it in the archived announcements yet — it isn't a sign that its ban was
+undocumented or arbitrary.
 
 ## Human review
 
