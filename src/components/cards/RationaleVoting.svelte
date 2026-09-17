@@ -7,27 +7,28 @@
 
 	interface Props {
 		scryfallId: string;
+		voteToken: string;
 	}
 
-	const { scryfallId }: Props = $props();
+	const { scryfallId, voteToken }: Props = $props();
 
 	let hidden = $state(false);
-	let voted = $state(false);
+	let status = $state<'idle' | 'voted' | 'error'>('idle');
 
 	onMount(() => {
 		hidden = isRationaleFeedbackHidden();
 	});
 
-	const vote = (direction: 1 | -1) => {
-		voted = true;
-
-		fetch(`/api/cards/${scryfallId}/rationale/vote`, {
+	const vote = async (direction: 1 | -1) => {
+		const response = await fetch(`/api/cards/${scryfallId}/rationale/vote`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ direction })
+			body: JSON.stringify({ direction, voteToken })
 		});
+
+		status = response.ok ? 'voted' : 'error';
 	};
 
 	const dismiss = () => {
@@ -38,9 +39,12 @@
 
 {#if !hidden}
 	<p class="voting">
-		{#if voted}
+		{#if status === 'voted'}
 			Thanks for the feedback!
 		{:else}
+			{#if status === 'error'}
+				Something went wrong submitting your feedback. |
+			{/if}
 			Does this look accurate? |
 			<button type="button" onclick={() => vote(1)}>Yes</button>
 			•
