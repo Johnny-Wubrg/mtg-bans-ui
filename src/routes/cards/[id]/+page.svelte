@@ -8,6 +8,7 @@
 
 	interface PageData {
 		card: Card;
+		voteToken: string | null;
 	}
 
 	interface Props {
@@ -15,7 +16,7 @@
 	}
 
 	const { data }: Props = $props();
-	const { card } = data;
+	const { card, voteToken } = data;
 
 	const trackVisit = () => trackCustomEvent('Scryfall Visit', { card: card.name });
 </script>
@@ -50,7 +51,7 @@
 
 {#if card.rationale}
 	<h2>Rationale</h2>
-	<CardRationale scryfallId={card.scryfallId} rationale={card.rationale} />
+	<CardRationale scryfallId={card.scryfallId} rationale={card.rationale} {voteToken} />
 {/if}
 
 <style lang="scss">
@@ -86,8 +87,8 @@
 			margin-top: 0;
 		}
 		@include breakpoints.large {
-		  text-align: left;
-		  flex: 0 0 auto;
+			text-align: left;
+			flex: 0 0 auto;
 		}
 	}
 </style>

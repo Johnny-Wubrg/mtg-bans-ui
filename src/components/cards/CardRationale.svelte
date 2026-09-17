@@ -1,16 +1,18 @@
 <script lang="ts">
 	import type { CardRationale } from '$lib/models/Card';
 	import { formatDate } from '$lib/utils/date';
+	import { needsRationaleReview } from '$lib/utils/rationale';
 	import RationaleVoting from './RationaleVoting.svelte';
 
 	interface Props {
 		scryfallId: string;
 		rationale: CardRationale;
+		voteToken: string | null;
 	}
 
-	const { scryfallId, rationale }: Props = $props();
+	const { scryfallId, rationale, voteToken }: Props = $props();
 
-	const needsReview = $derived(!!rationale.aiModel && !rationale.dateApproved);
+	const needsReview = $derived(needsRationaleReview(rationale));
 </script>
 
 <p class="text">{rationale.text}</p>
@@ -31,8 +33,8 @@
 	</p>
 {/if}
 
-{#if needsReview}
-	<RationaleVoting {scryfallId} />
+{#if needsReview && voteToken}
+	<RationaleVoting {scryfallId} {voteToken} />
 {/if}
 
 <style lang="scss">
