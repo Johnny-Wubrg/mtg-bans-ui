@@ -7,6 +7,7 @@ export interface Announcement {
 	dateEffective: string;
 	dateNextProjected: string;
 	summary: string;
+	isFeatured: boolean;
 	sources: Publication[];
 	changesets: AnnouncementFormat[];
 }

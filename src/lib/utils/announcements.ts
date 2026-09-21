@@ -65,8 +65,10 @@ export const formatDaysUntil = (daysUntil: number) =>
 	daysUntil === 0 ? 'today' : `in ${daysUntil} day${daysUntil === 1 ? '' : 's'}`;
 
 export const getLatestAnnouncement = (announcements: Announcement[]): Announcement | undefined =>
-	announcements.reduce<Announcement | undefined>(
-		(latest, announcement) =>
-			!latest || announcement.dateEffective > latest.dateEffective ? announcement : latest,
-		undefined
-	);
+	announcements
+		.filter((announcement) => announcement.isFeatured)
+		.reduce<Announcement | undefined>(
+			(latest, announcement) =>
+				!latest || announcement.dateEffective > latest.dateEffective ? announcement : latest,
+			undefined
+		);

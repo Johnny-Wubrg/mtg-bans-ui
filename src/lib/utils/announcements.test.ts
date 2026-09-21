@@ -2,12 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { formatDaysUntil, getLatestAnnouncement, getNextAnnouncementStatus } from './announcements';
 import type { Announcement } from '$lib/models/Announcement';
 
-const announcement = (dateEffective: string): Announcement => ({
+const announcement = (dateEffective: string, isFeatured = true): Announcement => ({
 	id: 1,
 	dateAnnounced: dateEffective,
 	dateEffective,
 	dateNextProjected: '0001-01-01',
 	summary: '',
+	isFeatured,
 	sources: [],
 	changesets: []
 });
@@ -80,5 +81,12 @@ describe('getLatestAnnouncement', () => {
 		const newest = announcement('2026-05-01');
 
 		expect(getLatestAnnouncement([middle, oldest, newest])).toBe(newest);
+	});
+
+	it('ignores announcements not flagged for the homepage banner', () => {
+		const featured = announcement('2022-06-15');
+		const unfeaturedNewest = announcement('2026-05-01', false);
+
+		expect(getLatestAnnouncement([featured, unfeaturedNewest])).toBe(featured);
 	});
 });
