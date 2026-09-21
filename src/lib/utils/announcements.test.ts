@@ -6,7 +6,7 @@ const announcement = (dateEffective: string, isFeatured = true): Announcement =>
 	id: 1,
 	dateAnnounced: dateEffective,
 	dateEffective,
-	dateNextProjected: '0001-01-01',
+	dateNextProjected: null,
 	summary: '',
 	isFeatured,
 	sources: [],
@@ -17,7 +17,7 @@ describe('getNextAnnouncementStatus', () => {
 	const now = new Date('2026-05-01T12:00:00-07:00');
 
 	it('is unknown when the date has not been set', () => {
-		expect(getNextAnnouncementStatus('0001-01-01', now)).toEqual({ status: 'unknown' });
+		expect(getNextAnnouncementStatus(null, now)).toEqual({ status: 'unknown' });
 	});
 
 	it('is scheduled when more than a week away', () => {

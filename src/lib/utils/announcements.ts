@@ -29,9 +29,6 @@ export type NextAnnouncementStatus =
 	| NextAnnouncementStatusImminent
 	| NextAnnouncementStatusOverdue;
 
-const isProjectedDateKnown = (dateNextProjected: string) =>
-	new Date(`${dateNextProjected}T00:00:00Z`).getUTCFullYear() > 1;
-
 const pacificCalendarDate = (date: Date) =>
 	new Intl.DateTimeFormat('en-CA', {
 		timeZone: PACIFIC_TIME_ZONE,
@@ -48,10 +45,10 @@ const daysUntilPacific = (dateIso: string, now: Date) => {
 };
 
 export const getNextAnnouncementStatus = (
-	dateNextProjected: string,
+	dateNextProjected: string | null,
 	now: Date = new Date()
 ): NextAnnouncementStatus => {
-	if (!isProjectedDateKnown(dateNextProjected)) return { status: 'unknown' };
+	if (!dateNextProjected) return { status: 'unknown' };
 
 	const daysUntil = daysUntilPacific(dateNextProjected, now);
 
@@ -67,8 +64,6 @@ export const formatDaysUntil = (daysUntil: number) =>
 export const getLatestAnnouncement = (announcements: Announcement[]): Announcement | undefined =>
 	announcements
 		.filter((announcement) => announcement.isFeatured)
-		.reduce<Announcement | undefined>(
-			(latest, announcement) =>
-				!latest || announcement.dateEffective > latest.dateEffective ? announcement : latest,
-			undefined
-		);
+		.reduce<Announcement | undefined>((latest, announcement) => {
+			return !latest || announcement.dateEffective > latest.dateEffective ? announcement : latest;
+		}, undefined);
