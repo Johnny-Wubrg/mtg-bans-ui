@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import CardSearch from '../components/cards/CardSearch.svelte';
+	import CardImageLink from '../components/cards/CardImageLink.svelte';
 	import LatestAnnouncementBanner from '../components/announcements/LatestAnnouncementBanner.svelte';
 	import PageTitle from '../components/layout/PageTitle.svelte';
 	import type { PageData } from './$types';
@@ -36,9 +37,7 @@
 			<h3>Most Notorious Cards</h3>
 			<div class="cards">
 				{#each mostNotoriousCards as card}
-					<a href={`/cards/${card.scryfallId}`}>
-						<img src={card.scryfallImageUri} alt={card.name} />
-					</a>
+					<CardImageLink {card} />
 				{/each}
 			</div>
 			<p>
@@ -82,14 +81,8 @@
 			gap: 1em;
 			margin: 1em 0;
 
-			img {
-				display: block;
-				width: 100%;
-				border-radius: 0.5em;
-			}
-
 			@media (max-width: 600px) {
-				a:nth-child(n + 5) {
+				:global(a:nth-child(n + 5)) {
 					display: none;
 				}
 			}

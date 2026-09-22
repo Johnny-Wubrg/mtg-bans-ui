@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import CardImageLink from '../../components/cards/CardImageLink.svelte';
 	import PageTitle from '../../components/layout/PageTitle.svelte';
 	import type { PageData } from './$types';
 
@@ -23,9 +24,7 @@
 
 <div class="grid">
 	{#each cards as card}
-		<a class="card" href={`/cards/${card.scryfallId}`}>
-			<img src={card.scryfallImageUri} alt={card.name} loading="lazy" />
-		</a>
+		<CardImageLink {card} />
 	{/each}
 </div>
 
@@ -39,11 +38,5 @@
 		grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
 		gap: 1em;
 		margin-top: 2em;
-	}
-
-	.card img {
-		display: block;
-		width: 100%;
-		border-radius: 0.5em;
 	}
 </style>
