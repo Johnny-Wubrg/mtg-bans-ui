@@ -26,22 +26,19 @@ history. Each card is scored based on a variety of factors.
   is treated as slightly more notorious than one that took years to become a problem.
 - **How long it's spent on the banlist.** A card that's been banned for a long stretch of time is
   treated as slightly more notorious than one banned only briefly.
+- **How many separate times it's cycled on and off the banlist in the same format.** A card that's
+  been banned, later allowed back, and then banned again — sometimes more than once — is treated as
+  more notorious than one that was simply banned a single time and left alone. A back-and-forth
+  history like that usually means the card, or the reasoning around it, was genuinely contentious.
 - **Whether it was banned on its own merit, or caught in a broad, mechanic-wide sweep.**
   Sometimes a whole category of cards gets banned together for reasons that have nothing to do with
   any one card's individual power. Cards banned this way are treated as less notorious than cards
-  singled out on their own merits, and the penalty varies with the reason for the sweep:
-  - Mechanics that cause legitimate logistical concerns like stickers, attractions, and manual
-    dexterity requirements get a smaller penalty since similar cards could feasibly be printed today
-    and individually get banned.
-  - Deliberate policy decisions like the 1994 Legend rule restriction or the ante mechanic are
-    weighted less heavily, since they reflect a change in the direction of the game rather than any
-    one card being too strong. Similarly, Conspiracy cards were banned purely because they were
-    never intended to be playted in constructed formats to begin with, and receive the same weight.
+  singled out on their own merits.
   - Cards banned for depicting racially or culturally insensitive material are excluded
     from the index entirely. Including them would run counter to why they were banned in the
     first place.
 
-This index is meant to be a fun, evolving way to explore ban history, not a precise scientific 
-ranking.
+This index is meant to be a fun, evolving way to explore ban history, not a precise scientific
+ranking. The algorithm is subject to change without notice as we figure things out.
 
 [See the current top 100](/notoriety)
