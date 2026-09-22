@@ -87,6 +87,12 @@
 				width: 100%;
 				border-radius: 0.5em;
 			}
+
+			@media (max-width: 600px) {
+				a:nth-child(n + 5) {
+					display: none;
+				}
+			}
 		}
 	}
 </style>
