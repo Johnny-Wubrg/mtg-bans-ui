@@ -51,6 +51,13 @@ export interface FormatBans {
 	limitations: FormatBansLimitation[];
 }
 
+export interface CardNotorietySummary {
+	scryfallId: string;
+	name: string;
+	scryfallImageUri: string;
+	scryfallUri: string;
+}
+
 export interface FormatBansLimitation {
 	status: string;
 	color?: GraphColor;
