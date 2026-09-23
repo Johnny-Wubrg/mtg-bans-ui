@@ -3,6 +3,7 @@ import type { FormatBansLimitation } from './Card';
 export interface Format {
   name: string;
   slug: string;
+  aliases: string[];
 }
 
 export interface FormatDetail extends Format {

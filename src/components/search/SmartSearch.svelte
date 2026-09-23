@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { searchCards } from '$lib/api/search';
-	import type { CardSearchResult } from '$lib/models/Search';
+	import { smartSearch } from '$lib/api/smartSearch';
+	import type { SmartSearchGroup, SmartSearchItem } from '$lib/models/Search';
 	import { trackCustomEvent } from '$lib/utils/tracking';
 	import { tick } from 'svelte';
 
 	let query = $state('');
-	let results = $state<CardSearchResult[]>([]);
-	let hasMore = $state(false);
-	let showUnknown = $state(true);
+	let groups = $state<SmartSearchGroup[]>([]);
+	let toggleState = $state<Record<string, boolean>>({});
 	let open = $state(false);
 	let loading = $state(false);
 	let highlightedIndex = $state(0);
@@ -18,7 +17,21 @@
 	let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 	let requestId = 0;
 
-	const visibleResults = $derived(showUnknown ? results : results.filter((r) => r.known));
+	const visibleGroups = $derived(
+		groups.map((group) => ({
+			...group,
+			items:
+				group.toggle && !toggleState[group.id]
+					? group.items.filter((item) => !item.disabled)
+					: group.items
+		}))
+	);
+
+	const flatItems = $derived(
+		visibleGroups.flatMap((group) => group.items.map((item) => ({ item, group })))
+	);
+
+	const anyHasMore = $derived(visibleGroups.some((group) => group.hasMore));
 
 	$effect(() => {
 		rowElements[highlightedIndex]?.scrollIntoView({ block: 'nearest' });
@@ -29,17 +42,23 @@
 		loading = true;
 		open = true;
 
-		const response = await searchCards(term);
+		const response = await smartSearch(term);
 
 		if (id !== requestId) return;
 
-		results = response.results;
-		hasMore = response.hasMore;
+		groups = response.groups;
+		for (const group of groups) {
+			if (group.toggle && !(group.id in toggleState)) {
+				toggleState[group.id] = group.toggle.defaultValue ?? true;
+			}
+		}
 		highlightedIndex = 0;
 		loading = false;
 
 		await tick();
-		trackCustomEvent('Card Searched', { query: term });
+		for (const group of groups) {
+			if (group.items.length) trackCustomEvent(`${group.label} Searched`, { query: term });
+		}
 	};
 
 	const handleInput = () => {
@@ -48,8 +67,7 @@
 
 		if (!term) {
 			requestId++;
-			results = [];
-			hasMore = false;
+			groups = [];
 			open = false;
 			loading = false;
 			return;
@@ -58,10 +76,10 @@
 		debounceTimer = setTimeout(() => runSearch(term), 300);
 	};
 
-	const goToResult = (result: CardSearchResult) => {
-		if (!result.known) return;
+	const goToResult = (entry: { item: SmartSearchItem }) => {
+		if (!entry.item.href) return;
 		open = false;
-		goto(`/cards/${result.scryfallId}`);
+		goto(entry.item.href);
 	};
 
 	const handleKeydown = (evt: KeyboardEvent) => {
@@ -70,17 +88,17 @@
 			return;
 		}
 
-		if (!open || !visibleResults.length) return;
+		if (!open || !flatItems.length) return;
 
 		if (evt.key === 'ArrowDown') {
 			evt.preventDefault();
-			highlightedIndex = Math.min(highlightedIndex + 1, visibleResults.length - 1);
+			highlightedIndex = Math.min(highlightedIndex + 1, flatItems.length - 1);
 		} else if (evt.key === 'ArrowUp') {
 			evt.preventDefault();
 			highlightedIndex = Math.max(highlightedIndex - 1, 0);
 		} else if (evt.key === 'Enter') {
 			evt.preventDefault();
-			goToResult(visibleResults[highlightedIndex]);
+			goToResult(flatItems[highlightedIndex]);
 		}
 	};
 
@@ -95,7 +113,7 @@
 	<div class="search-container">
 		<input
 			type="text"
-			placeholder="Search for a card..."
+			placeholder="Search for a card, format, or date..."
 			bind:value={query}
 			oninput={handleInput}
 			onkeydown={handleKeydown}
@@ -104,40 +122,46 @@
 
 		{#if open}
 			<ul class="results">
-				<li class="toggle">
-					<label>
-						<input
-							type="checkbox"
-							bind:checked={showUnknown}
-							onchange={() => (highlightedIndex = 0)}
-						/>
-						Show all cards
-					</label>
-				</li>
+				{#each groups as group (group.id)}
+					{#if group.toggle}
+						<li class="toggle">
+							<label>
+								<input
+									type="checkbox"
+									checked={toggleState[group.id]}
+									onchange={(e) => {
+										toggleState[group.id] = e.currentTarget.checked;
+										highlightedIndex = 0;
+									}}
+								/>
+								{group.toggle.label}
+							</label>
+						</li>
+					{/if}
+				{/each}
+
 				{#if loading}
 					<li class="message">Searching...</li>
-				{:else if !visibleResults.length}
-					{#if hasMore}
-						<li class="message">
-							No cards found. Narrow your search to see more specific results.
-						</li>
-					{:else}
-						<li class="message">No cards found.</li>
-					{/if}
+				{:else if !flatItems.length}
+					<li class="message">
+						No results found. {#if anyHasMore}Narrow your search to see more specific results.{/if}
+					</li>
 				{:else}
-					{#each visibleResults as result, i (result.scryfallId)}
+					{#each flatItems as entry, i (entry.group.id + ':' + entry.item.id)}
 						<li>
-							{#if result.known}
+							{#if entry.item.href}
 								<a
-									href={`/cards/${result.scryfallId}`}
+									href={entry.item.href}
 									class="row"
 									class:highlighted={i === highlightedIndex}
 									bind:this={rowElements[i]}
 									onmouseenter={() => (highlightedIndex = i)}
 									onclick={() => (open = false)}
 								>
-									<img src={result.scryfallImageUri} alt={result.name} />
-									<span class="name">{result.name}</span>
+									{#if entry.item.imageUri}
+										<img src={entry.item.imageUri} alt={entry.item.label} />
+									{/if}
+									<span class="name">{entry.item.label}</span>
 								</a>
 							{:else}
 								<div
@@ -147,14 +171,18 @@
 									onmouseenter={() => (highlightedIndex = i)}
 									role="presentation"
 								>
-									<img src={result.scryfallImageUri} alt={result.name} />
-									<span class="name">{result.name}</span>
-									<span class="label">No banning records</span>
+									{#if entry.item.imageUri}
+										<img src={entry.item.imageUri} alt={entry.item.label} />
+									{/if}
+									<span class="name">{entry.item.label}</span>
+									{#if entry.item.disabledLabel}
+										<span class="label">{entry.item.disabledLabel}</span>
+									{/if}
 								</div>
 							{/if}
 						</li>
 					{/each}
-					{#if hasMore}
+					{#if anyHasMore}
 						<li class="message hint">Narrow your search to see more specific results.</li>
 					{/if}
 				{/if}
@@ -236,7 +264,6 @@
 		color: var(--color-text);
 		text-decoration: none;
 
-		&:hover,
 		&.highlighted {
 			background: var(--color-border);
 
