@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
-	import CardSearch from '../components/cards/CardSearch.svelte';
+	import SmartSearch from '../components/search/SmartSearch.svelte';
 	import CardImageLink from '../components/cards/CardImageLink.svelte';
 	import LatestAnnouncementBanner from '../components/announcements/LatestAnnouncementBanner.svelte';
 	import PageTitle from '../components/layout/PageTitle.svelte';
@@ -30,7 +30,7 @@
 		and restricted <b>Magic: the Gathering™</b> cards. Feel free to poke around.
 	</p>
 
-	<CardSearch />
+	<SmartSearch />
 
 	{#if mostNotoriousCards?.length}
 		<section class="notoriety">

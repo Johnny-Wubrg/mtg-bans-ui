@@ -54,6 +54,7 @@
 			display: none;
 			position: absolute;
 			top: 100%;
+			z-index: 10;
 		}
 
 		&-child {
