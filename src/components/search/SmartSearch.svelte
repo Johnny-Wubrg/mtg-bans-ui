@@ -57,7 +57,7 @@
 
 		await tick();
 		for (const group of groups) {
-			if (group.items.length) trackCustomEvent(`Term Search`, { query: term });
+			if (group.items.length) trackCustomEvent(`Search Query`, { query: term });
 		}
 	};
 
