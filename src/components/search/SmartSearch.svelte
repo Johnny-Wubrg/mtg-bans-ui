@@ -56,9 +56,7 @@
 		loading = false;
 
 		await tick();
-		for (const group of groups) {
-			if (group.items.length) trackCustomEvent(`Search Query`, { query: term });
-		}
+		trackCustomEvent(`Search Query`, { query: term });
 	};
 
 	const handleInput = () => {
