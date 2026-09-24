@@ -23,9 +23,7 @@ history. Each card is scored based on a variety of factors.
   weight than one that was banned and later unbanned — a reversed ban suggests the original concern
   mattered less over time.
 - **How quickly it was banned after release.** A card that gets banned within its first few months
-  is treated as slightly more notorious than one that took years to become a problem.
-- **How long it's spent on the banlist.** A card that's been banned for a long stretch of time is
-  treated as slightly more notorious than one banned only briefly.
+  is treated as more notorious than one that took years to become a problem.
 - **How many separate times it's cycled on and off the banlist in the same format.** A card that's
   been banned, later allowed back, and then banned again — sometimes more than once — is treated as
   more notorious than one that was simply banned a single time and left alone. A back-and-forth
