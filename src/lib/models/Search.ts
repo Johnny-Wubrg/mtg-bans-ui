@@ -1,13 +1,29 @@
+import type { GraphColor } from './Graphics';
+
+export interface CardSearchLimitation {
+	format: string;
+	status: string;
+	color: GraphColor;
+	additionalFormatCount: number;
+}
+
 export interface CardSearchResult {
 	scryfallId: string;
 	name: string;
 	scryfallImageUri: string | null;
 	known: boolean;
+	currentLimitation: CardSearchLimitation | null;
 }
 
 export interface CardSearchResponse {
 	results: CardSearchResult[];
 	hasMore: boolean;
+}
+
+export interface SmartSearchPill {
+	label: string;
+	variant: 'status' | 'neutral' | 'faded';
+	color?: GraphColor;
 }
 
 export interface SmartSearchItem {
@@ -16,7 +32,7 @@ export interface SmartSearchItem {
 	href?: string;
 	imageUri?: string | null;
 	disabled?: boolean;
-	disabledLabel?: string;
+	pill?: SmartSearchPill;
 }
 
 export interface SmartSearchGroup {

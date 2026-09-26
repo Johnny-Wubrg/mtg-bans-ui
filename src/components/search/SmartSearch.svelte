@@ -160,6 +160,11 @@
 										<img src={entry.item.imageUri} alt={entry.item.label} />
 									{/if}
 									<span class="name">{entry.item.label}</span>
+									{#if entry.item.pill}
+										<span class="pill {entry.item.pill.variant}" data-color={entry.item.pill.color}>
+											{entry.item.pill.label}
+										</span>
+									{/if}
 								</a>
 							{:else}
 								<div
@@ -173,8 +178,10 @@
 										<img src={entry.item.imageUri} alt={entry.item.label} />
 									{/if}
 									<span class="name">{entry.item.label}</span>
-									{#if entry.item.disabledLabel}
-										<span class="label">{entry.item.disabledLabel}</span>
+									{#if entry.item.pill}
+										<span class="pill {entry.item.pill.variant}" data-color={entry.item.pill.color}>
+											{entry.item.pill.label}
+										</span>
 									{/if}
 								</div>
 							{/if}
@@ -279,6 +286,9 @@
 
 		.name {
 			flex: 1 0 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 
@@ -286,11 +296,47 @@
 		.name {
 			color: var(--mtg-black);
 		}
+	}
 
-		.label {
-			text-align: right;
-			font-size: 0.75em;
-			color: var(--mtg-black);
+	.pill {
+		flex-shrink: 0;
+		display: inline-block;
+		border-radius: 999px;
+		padding: 0.1em 0.75em;
+		font-size: 0.675em;
+		white-space: nowrap;
+
+		&.neutral {
+			background: var(--color-border);
+			color: var(--color-dark-gray);
+		}
+
+		&.faded {
+			background: var(--color-border);
+			color: var(--color-dark-gray);
+			opacity: 0.5;
+		}
+
+		&.status {
+			color: var(--color-white);
+
+			&[data-color='red'] {
+				background: var(--mtg-red);
+			}
+
+			&[data-color='green'] {
+				background: var(--mtg-green);
+			}
+
+			&[data-color='yellow'] {
+				background: var(--mtg-yellow);
+				color: var(--color-dark-gray);
+			}
+
+			&[data-color='white'] {
+				background: var(--mtg-white);
+				color: var(--color-dark-gray);
+			}
 		}
 	}
 </style>

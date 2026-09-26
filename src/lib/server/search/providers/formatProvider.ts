@@ -13,10 +13,10 @@ const loadFormats = async (): Promise<Format[]> => {
 };
 
 const matchFormat = (format: Format, term: string) => {
-	if (format.name.toLowerCase().includes(term)) return format.name + ' Format';
+	if (format.name.toLowerCase().includes(term)) return format.name;
 
 	const alias = format.aliases.find((alias) => alias.toLowerCase().includes(term));
-	return alias ? `${format.name} Format (aka ${alias})` : null;
+	return alias ? `${format.name} (aka ${alias})` : null;
 };
 
 export const formatProvider: SearchProvider = {
@@ -29,7 +29,16 @@ export const formatProvider: SearchProvider = {
 		const formats = await loadFormats();
 		const items = formats.flatMap((format) => {
 			const label = matchFormat(format, term);
-			return label ? [{ id: format.slug, label, href: `/formats/${format.slug}` }] : [];
+			return label
+				? [
+						{
+							id: format.slug,
+							label,
+							href: `/formats/${format.slug}`,
+							pill: { label: 'Format', variant: 'neutral' as const }
+						}
+					]
+				: [];
 		});
 
 		return { items };
