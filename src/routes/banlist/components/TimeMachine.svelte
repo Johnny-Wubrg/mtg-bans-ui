@@ -42,7 +42,8 @@
 		display: flex;
 		gap: $gap;
 
-		button, .button {
+		button,
+		.button {
 			display: block;
 			width: 100%;
 		}

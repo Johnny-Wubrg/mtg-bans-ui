@@ -1,9 +1,7 @@
 <script>
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 
-
 	import PageTitle from './PageTitle.svelte';
-
 </script>
 
 <section>
@@ -13,9 +11,8 @@
 	</p>
 </section>
 
-
 <style>
-  p {
-    text-align: center; 
-  }
+	p {
+		text-align: center;
+	}
 </style>

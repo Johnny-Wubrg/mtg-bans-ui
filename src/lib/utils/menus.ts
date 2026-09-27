@@ -16,6 +16,6 @@ export const getMainMenu = async (): Promise<MenuLink[]> => {
 			children: formats.map((f) => ({ href: `/formats/${f.slug}`, label: f.name }))
 		},
 		{ href: '/banlist', label: 'Banlist' },
-		{ href: '/contact', label: 'Contact' }
+		{ href: '/announcements', label: 'Announcements' }
 	];
 };

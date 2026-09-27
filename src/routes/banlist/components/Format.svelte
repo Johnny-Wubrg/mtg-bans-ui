@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CardList from '../../../components/cards/CardList.svelte';
+	import CardList from '$components/cards/CardList.svelte';
 	import type { FormatBans } from '$lib/models/Card.js';
 
 	interface Props {

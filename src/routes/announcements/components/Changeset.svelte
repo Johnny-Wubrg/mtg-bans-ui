@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { AnnouncementFormat } from '$lib/models/Announcement';
-	import CardList from '../../../components/cards/CardList.svelte';
+	import CardList from '$components/cards/CardList.svelte';
 
 	interface Props {
 		changeset: AnnouncementFormat;
@@ -39,7 +39,7 @@
 		color: var(--mtg-green);
 	}
 
-  :global(.delta-minus) {
+	:global(.delta-minus) {
 		color: var(--mtg-red);
 	}
 </style>

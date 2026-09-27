@@ -8,5 +8,5 @@ export const load = (async () => {
 	const latestAnnouncement = getLatestAnnouncement(announcements);
 	const mostNotoriousCards = await getMostNotoriousCards(5);
 
-	return { latestAnnouncement, mostNotoriousCards };
+	return { latestAnnouncement, mostNotoriousCards, homepage: true };
 }) satisfies PageServerLoad;

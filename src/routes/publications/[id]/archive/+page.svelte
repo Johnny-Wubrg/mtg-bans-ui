@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PublicationArchive } from '$lib/models/Publication';
-	import PageTitle from '../../../../components/layout/PageTitle.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	interface Props {

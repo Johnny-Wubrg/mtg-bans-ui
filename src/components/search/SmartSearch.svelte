@@ -213,13 +213,14 @@
 		.footnote {
 			margin: 0;
 			font-size: 0.75em;
-			text-align: right;
+			text-align: center;
 			font-style: italic;
 		}
 	}
 
 	input[type='text'] {
 		width: 100%;
+		background-color: var(--color-background);
 	}
 
 	.results {

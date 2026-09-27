@@ -38,7 +38,7 @@
 		if (!target.dataset.imagePreview) {
 			src = '';
 			lastPreview = '';
-      if (trackingDebouncer) clearTimeout(trackingDebouncer);
+			if (trackingDebouncer) clearTimeout(trackingDebouncer);
 			return;
 		}
 

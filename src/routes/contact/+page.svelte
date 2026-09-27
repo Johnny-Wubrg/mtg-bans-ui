@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 	import { goto } from '$app/navigation';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { onMount } from 'svelte';
@@ -105,9 +105,6 @@
 		textarea {
 			display: block;
 			width: 100%;
-		}
-		option {
-			color: var(--color-black);
 		}
 		textarea {
 			resize: vertical;

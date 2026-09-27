@@ -34,7 +34,7 @@ export const getMaintenance = (): MaintenanceDetails => {
 
 	return {
 		status: 'active',
-    date: maintenanceDatetime,
-    message: `${PUBLIC_APP_NAME} is currently undergoing routine maintenance. Some features may be unavailable at this time.`
+		date: maintenanceDatetime,
+		message: `${PUBLIC_APP_NAME} is currently undergoing routine maintenance. Some features may be unavailable at this time.`
 	};
 };

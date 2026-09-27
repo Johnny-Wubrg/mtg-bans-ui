@@ -1,10 +1,11 @@
 <script>
 import { PUBLIC_APP_NAME } from '$env/static/public';
-import PageTitle from '../../components/layout/PageTitle.svelte';
-import RationaleFeedbackPreference from '../../components/cards/RationaleFeedbackPreference.svelte';
+import PageTitle from '$components/layout/PageTitle.svelte';
+import RationaleFeedbackPreference from '$components/cards/RationaleFeedbackPreference.svelte';
 </script>
 
 <svelte:head>
+
 <title>How AI Rationales Are Written | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 

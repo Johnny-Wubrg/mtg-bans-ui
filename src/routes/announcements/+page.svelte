@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 	import type { Announcement } from '$lib/models/Announcement';
 	import type { PageData } from './$types';
-	import FormattedDate from '../../components/FormattedDate.svelte';
-	import SpecialCredits from '../../components/SpecialCredits.svelte';
-	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import FormattedDate from '$components/FormattedDate.svelte';
+	import SpecialCredits from '$components/SpecialCredits.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 	import Changeset from './components/Changeset.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 

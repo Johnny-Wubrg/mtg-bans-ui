@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { Card } from '$lib/models/Card';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { trackCustomEvent } from '$lib/utils/tracking';
-	import BanStatusChart from '../../../components/cards/BanStatusChart.svelte';
-	import CardRationale from '../../../components/cards/CardRationale.svelte';
-	import LegalityTimeline from '../../../components/cards/LegalityTimeline.svelte';
-	import PageTitle from '../../../components/layout/PageTitle.svelte';
+	import BanStatusChart from '$components/cards/BanStatusChart.svelte';
+	import CardRationale from '$components/cards/CardRationale.svelte';
+	import LegalityTimeline from '$components/cards/LegalityTimeline.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 
 	interface PageData {
 		card: Card;
@@ -20,6 +21,10 @@
 
 	const trackVisit = () => trackCustomEvent('Scryfall Visit', { card: card.name });
 </script>
+
+<svelte:head>
+	<title>{card.name} | {PUBLIC_APP_NAME}</title>
+</svelte:head>
 
 <PageTitle>{card.name}</PageTitle>
 

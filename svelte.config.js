@@ -20,7 +20,8 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			'@scissors': './node_modules/@quangdao/scissors/scss'
+      '@scissors': './node_modules/@quangdao/scissors/scss',
+			'$components': './src/components'
 		}
 	}
 };

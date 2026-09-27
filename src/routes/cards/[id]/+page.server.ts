@@ -13,7 +13,8 @@ export const load = (async ({ params }) => {
 
 	return {
 		card,
-		voteToken
+		voteToken,
+		description: `Track ${card.name}'s ban and restriction history across Magic: The Gathering formats.`
 	};
 }) satisfies PageServerLoad;
 
