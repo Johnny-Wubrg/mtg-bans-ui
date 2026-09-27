@@ -220,12 +220,7 @@
 				/>
 
 				{#each line.nodes as node}
-					<circle
-						class="node"
-						cx={getGraphX(node.x)}
-						cy={getGraphY(node.y)}
-						r="2"
-					/>
+					<circle class="node" cx={getGraphX(node.x)} cy={getGraphY(node.y)} r="2" />
 				{/each}
 			</g>
 		{/each}

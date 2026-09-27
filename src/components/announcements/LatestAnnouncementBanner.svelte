@@ -19,7 +19,7 @@
 	</a>
 
 	{#if nextStatus.status === 'imminent'}
-	  • Next: <FormattedDate date={nextStatus.date} /> ({formatDaysUntil(nextStatus.daysUntil)})
+		• Next: <FormattedDate date={nextStatus.date} /> ({formatDaysUntil(nextStatus.daysUntil)})
 	{:else if nextStatus.status === 'scheduled'}
 		• Next: <FormattedDate date={nextStatus.date} />
 	{:else if nextStatus.status === 'overdue'}

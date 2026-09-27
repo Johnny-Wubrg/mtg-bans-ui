@@ -45,7 +45,8 @@
 			{:else if event.announcementId}
 				<a href="/announcements#announcement_{event.announcementId}">
 					<FormattedDate date={event.date} />
-				</a> - Status changed to
+				</a>
+				- Status changed to
 				<span class={event.color}>{event.status}</span>{selectedFormat === 'All'
 					? ` in ${event.format}`
 					: ''}

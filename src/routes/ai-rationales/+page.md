@@ -5,6 +5,7 @@ import RationaleFeedbackPreference from '../../components/cards/RationaleFeedbac
 </script>
 
 <svelte:head>
+
 <title>How AI Rationales Are Written | {PUBLIC_APP_NAME}</title>
 </svelte:head>
 

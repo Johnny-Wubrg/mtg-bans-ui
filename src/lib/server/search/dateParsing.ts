@@ -39,7 +39,8 @@ const resolveMonthDayYear = (a: number, b: number, year: number, now: Date): Par
 	const american = tryDate(year, a, b);
 	const nonAmerican = tryDate(year, b, a);
 	const results: ParsedSearchDate[] = [];
-	if (american && withinRange(american, now)) results.push({ date: american, americanFormat: true });
+	if (american && withinRange(american, now))
+		results.push({ date: american, americanFormat: true });
 	if (nonAmerican && withinRange(nonAmerican, now)) {
 		results.push({ date: nonAmerican, americanFormat: false });
 	}

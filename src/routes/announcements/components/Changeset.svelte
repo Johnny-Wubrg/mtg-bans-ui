@@ -39,7 +39,7 @@
 		color: var(--mtg-green);
 	}
 
-  :global(.delta-minus) {
+	:global(.delta-minus) {
 		color: var(--mtg-red);
 	}
 </style>

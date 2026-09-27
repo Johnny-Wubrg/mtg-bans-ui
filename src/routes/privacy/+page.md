@@ -6,6 +6,7 @@ import FormattedDate from '../../components/FormattedDate.svelte';
 </script>
 
 <svelte:head>
+
 <title>{PUBLIC_APP_NAME} Privacy Policy</title>
 </svelte:head>
 

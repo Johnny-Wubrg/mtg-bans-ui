@@ -5,7 +5,8 @@ export async function load({ params }) {
 	const format = await getFormat(params.slug);
 	if (!format) return error(404, 'Format not found.');
 	return {
-		format
+		format,
+		description: `The banned and restricted card history and timeline for ${format.name}.`
 	};
 }
 

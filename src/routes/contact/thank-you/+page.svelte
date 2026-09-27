@@ -9,12 +9,10 @@
 
 <PageTitle>Thank you!</PageTitle>
 
-<p>
-	Your feedback has been submitted. Thanks for connecting!
-</p>
+<p>Your feedback has been submitted. Thanks for connecting!</p>
 
 <style>
-  p {
-    text-align: center;
-  }
+	p {
+		text-align: center;
+	}
 </style>

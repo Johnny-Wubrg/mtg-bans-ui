@@ -9,10 +9,10 @@ export default defineConfig({
 	},
 
 	css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler'
-      }
-    }
-  }
+		preprocessorOptions: {
+			scss: {
+				api: 'modern-compiler'
+			}
+		}
+	}
 });

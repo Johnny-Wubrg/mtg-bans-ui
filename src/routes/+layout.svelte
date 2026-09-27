@@ -19,7 +19,7 @@
 	const homepage = $derived($page.data.homepage && maintenance.status !== 'active');
 </script>
 
-<svelte:head><SiteMeta /></svelte:head>
+<svelte:head><SiteMeta description={$page.data.description} /></svelte:head>
 
 <div class="app">
 	{#if browser && (maintenance.status === 'scheduled' || (maintenance.status === 'active' && $page.data.maintenanceExempt))}

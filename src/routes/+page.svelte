@@ -5,7 +5,6 @@
 	import LatestAnnouncementBanner from '../components/announcements/LatestAnnouncementBanner.svelte';
 	import type { PageData } from './$types';
 	import Wordmark from '../components/layout/Wordmark.svelte';
-	import SiteMeta from '../components/layout/SiteMeta.svelte';
 	import AppMenu from '../components/layout/AppMenu.svelte';
 
 	interface Props {
@@ -18,7 +17,6 @@
 </script>
 
 <svelte:head>
-	<SiteMeta />
 	<title>Welcome to {PUBLIC_APP_NAME}</title>
 </svelte:head>
 

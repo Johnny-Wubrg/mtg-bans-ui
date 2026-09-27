@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import type { FormatDetail, FormatSnapshot } from '$lib/models/Format';
 	import type { GraphMetric, GraphNode } from '$lib/models/Graphics';
+	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { convertDate, formatDateString, formatIsoDate } from '$lib/utils/date';
 	import { trackCustomEvent } from '$lib/utils/tracking';
 	import CardList from '../../../components/cards/CardList.svelte';
@@ -104,6 +105,10 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<title>{format.name} Banlist | {PUBLIC_APP_NAME}</title>
+</svelte:head>
 
 {#key page.params.slug}
 	<h1>{format.name}</h1>
