@@ -64,11 +64,10 @@ additional information on the announcements listed below, please [reach out](/co
 - Some categories of cards are blanket-banned, such as ante cards and Conspiracy cards. Future releases of such cards may have been missed after their initial banning. Some examples I came across are when new antes cards were released after they were banned in 1994 and when Conspiracy: Take the Crown introduced a new batch of Conpiracy cards. There may be other cases I'm missing.
 - Mana Crypt's status within Extended is somewhat unclear. It was explicitly banned at the format's inception, but was never printed in a set that was legal in the format and thus never "rotated". [As of 2008](https://web.archive.org/web/20081106201424/http://www.wizards.com/Magic/TCG/Resources.aspx?x=judge/resources/sfrextended), it was not explicitly listed in the format's banlist.
 - It's unclear when Commander / EDH first adopted the "Elder Dragon Highlander" name but it has had that name since the first banlist, so that's what I used as the turning point. It's likely that it's been called that for longer.
+- At some point between between August 13, 2018 and April 09, 2019, the Oathbreaker ban list was migrated to a new page, and the Wayback Machine does not have an archive of the changes between then. The delta between these two dates are currently aggregated into an unknown announcement.
 
 ## Missing Formats
 
-- Oathbreaker is currently not supported, but I have plans to add it. Any help to gather resources in advance would be
-  appreciated.
 - Block constructed is not supported due to technical limitations. There are currently no plans on supporting this
   format.
 - "Joke" (e.g. silver-bordered and acorn-stamped cards) are not included in any capacity, including when they were legal in Commander from December 1, 2017 to January 15, 2018.
