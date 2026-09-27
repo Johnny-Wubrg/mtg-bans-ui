@@ -9,12 +9,14 @@
 </script>
 
 <div class="notice">
-	<p>
-		<iconify-icon icon="mdi:information" width="100%"></iconify-icon>
-		<span class="message">
-			{@render children()}
-		</span>
-	</p>
+	<div class="container">
+		<p>
+			<iconify-icon icon="mdi:information" width="100%"></iconify-icon>
+			<span class="message">
+				{@render children()}
+			</span>
+		</p>
+	</div>
 </div>
 
 <style lang="scss">
@@ -23,17 +25,13 @@
 
 	.notice {
 		background: var(--color-gray);
+		text-align: center;
 		padding: 0.5em 1em;
-    margin: 0 1em;
-		border-radius: 0.5em;
+		margin: 0;
+		width: 100%;
 
 		@include media.dark {
 			background: var(--color-dark-gray);
-		}
-
-		@include breakpoints.large {
-			max-width: 1200px;
-			margin: auto;
 		}
 
 		p {
@@ -41,14 +39,14 @@
 		}
 	}
 
-  .message {
-    vertical-align: middle;
-  }
+	.message {
+		vertical-align: middle;
+	}
 
 	iconify-icon {
 		color: var(--color-foreground);
 		vertical-align: middle;
 		width: 1.5em;
-    margin-right: 0.25em;
+		margin-right: 0.25em;
 	}
 </style>

@@ -15,6 +15,7 @@ interface NextAnnouncementStatusScheduled {
 
 interface NextAnnouncementStatusImminent {
 	status: 'imminent';
+	date: string;
 	daysUntil: number;
 }
 
@@ -53,13 +54,14 @@ export const getNextAnnouncementStatus = (
 	const daysUntil = daysUntilPacific(dateNextProjected, now);
 
 	if (daysUntil < 0) return { status: 'overdue', date: dateNextProjected };
-	if (daysUntil <= IMMINENT_THRESHOLD_DAYS) return { status: 'imminent', daysUntil };
+	if (daysUntil <= IMMINENT_THRESHOLD_DAYS)
+		return { status: 'imminent', date: dateNextProjected, daysUntil };
 
 	return { status: 'scheduled', date: dateNextProjected };
 };
 
 export const formatDaysUntil = (daysUntil: number) =>
-	daysUntil === 0 ? 'today' : `in ${daysUntil} day${daysUntil === 1 ? '' : 's'}`;
+	daysUntil === 0 ? 'Due Today' : `${daysUntil} Day${daysUntil === 1 ? '' : 's'}`;
 
 export const getLatestAnnouncement = (announcements: Announcement[]): Announcement | undefined =>
 	announcements

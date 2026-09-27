@@ -73,6 +73,10 @@
   }
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -146,7 +150,8 @@ li ul, li ol {
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   padding: 0 1em;
 }

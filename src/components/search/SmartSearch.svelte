@@ -220,6 +220,7 @@
 
 	input[type='text'] {
 		width: 100%;
+		background-color: var(--color-background);
 	}
 
 	.results {
