@@ -1,7 +1,7 @@
 import type { Announcement } from '$lib/models/Announcement';
 
 const PACIFIC_TIME_ZONE = 'America/Los_Angeles';
-const IMMINENT_THRESHOLD_DAYS = 7;
+const IMMINENT_THRESHOLD_DAYS = 14;
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
 interface NextAnnouncementStatusUnknown {
