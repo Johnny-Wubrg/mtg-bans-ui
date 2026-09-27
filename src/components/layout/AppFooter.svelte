@@ -6,10 +6,10 @@
 	</p>
 
 	<p class="disclaimer">
-		<b>Magic: The Gathering™</b> is copyright Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc.
-		Portions of this website are unofficial fan content permitted under the Wizards of the Coast Fan
-		Content Policy. This site is not produced by, endorsed by, supported by, or affiliated with Wizards
-		of the Coast.
+		<b>Magic: The Gathering<sup>®</sup></b> is a trademark Wizards of the Coast, LLC, a subsidiary of
+		Hasbro, Inc. Portions of this website are unofficial fan content permitted under the Wizards of the
+		Coast Fan Content Policy. This site is not produced by, endorsed by, supported by, or affiliated
+		with Wizards of the Coast.
 	</p>
 
 	<p class="disclaimer">

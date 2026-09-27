@@ -106,9 +106,6 @@
 			display: block;
 			width: 100%;
 		}
-		option {
-			color: var(--color-black);
-		}
 		textarea {
 			resize: vertical;
 			min-height: 8em;

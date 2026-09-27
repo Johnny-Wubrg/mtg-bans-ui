@@ -53,6 +53,8 @@
 	--color-border: var(--color-gray);
 	--color-link: var(--mtg-blue-dark);
 	--color-tint: var(--color-purple);
+
+	color-scheme: light;
 }
 
 @include media.dark {
@@ -63,6 +65,8 @@
 		--color-border: var(--color-gray);
 		--color-link: var(--color-white-2);
 		--color-tint: var(--color-gray);
+
+		color-scheme: dark;
 
 		--mtg-white: var(--mtg-white-dark);
 		--mtg-blue: var(--mtg-blue-dark);
@@ -145,11 +149,13 @@ input[type='email'] {
 	border-radius: 0;
 	background: transparent;
 	color: var(--color-text);
-}
+	transition: border-color 300ms;
 
-option {
-	color: initial;
-	background: initial;
+	&:focus,
+	&:active {
+		outline: none;
+		border-color: var(--mtg-blue);
+	}
 }
 
 ul,
