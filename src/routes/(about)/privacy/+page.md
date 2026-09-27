@@ -1,7 +1,7 @@
 <script>
 import { PUBLIC_APP_NAME } from '$env/static/public';
-import PageTitle from '../../components/layout/PageTitle.svelte';
-import FormattedDate from '../../components/FormattedDate.svelte';
+import PageTitle from '$components/layout/PageTitle.svelte';
+import FormattedDate from '$components/FormattedDate.svelte';
 
 </script>
 

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
-	import SmartSearch from '../components/search/SmartSearch.svelte';
-	import CardImageLink from '../components/cards/CardImageLink.svelte';
-	import LatestAnnouncementBanner from '../components/announcements/LatestAnnouncementBanner.svelte';
+	import SmartSearch from '$components/search/SmartSearch.svelte';
+	import CardImageLink from '$components/cards/CardImageLink.svelte';
+	import LatestAnnouncementBanner from '$components/announcements/LatestAnnouncementBanner.svelte';
 	import type { PageData } from './$types';
-	import Wordmark from '../components/layout/Wordmark.svelte';
-	import AppMenu from '../components/layout/AppMenu.svelte';
+	import Wordmark from '$components/layout/Wordmark.svelte';
+	import AppMenu from '$components/layout/AppMenu.svelte';
 
 	interface Props {
 		data: PageData;

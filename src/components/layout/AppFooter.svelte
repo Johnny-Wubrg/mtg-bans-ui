@@ -2,7 +2,9 @@
 	<p>
 		A <a href="https://www.johnnywubrg.com">Johnny Wubrg</a> catastrophe by
 		<a href="https://www.quangdao.com">Quangdao Nguyen</a>. All rights reserved. |
-		<a href="/privacy">Privacy Policy</a> • <a href="/unresolved">How You Can Help</a>
+		<a href="/privacy">Privacy Policy</a>
+		• <a href="/unresolved">How You Can Help</a>
+		• <a href="/contact">Contact</a>
 	</p>
 
 	<p class="disclaimer">

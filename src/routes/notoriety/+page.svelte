@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
-	import CardImageLink from '../../components/cards/CardImageLink.svelte';
-	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import CardImageLink from '$components/cards/CardImageLink.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 	import type { PageData } from './$types';
 
 	interface Props {

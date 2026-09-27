@@ -1,12 +1,12 @@
 <script lang="ts">
 	import '../style/main.scss';
-	import AppHeader from '../components/layout/AppHeader.svelte';
-	import AppFooter from '../components/layout/AppFooter.svelte';
-	import SiteMeta from '../components/layout/SiteMeta.svelte';
-	import ImagePreview from '../components/global/ImagePreview.svelte';
+	import AppHeader from '$components/layout/AppHeader.svelte';
+	import AppFooter from '$components/layout/AppFooter.svelte';
+	import SiteMeta from '$components/layout/SiteMeta.svelte';
+	import ImagePreview from '$components/global/ImagePreview.svelte';
 	import { getMaintenance } from '$lib/utils/maintenance';
-	import Notice from '../components/layout/Notice.svelte';
-	import MaintenanceMessage from '../components/layout/MaintenanceMessage.svelte';
+	import Notice from '$components/layout/Notice.svelte';
+	import MaintenanceMessage from '$components/layout/MaintenanceMessage.svelte';
 	import 'iconify-icon';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';

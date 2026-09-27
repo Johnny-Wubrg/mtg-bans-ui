@@ -5,9 +5,9 @@
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { convertDate, formatDateString, formatIsoDate } from '$lib/utils/date';
 	import { trackCustomEvent } from '$lib/utils/tracking';
-	import CardList from '../../../components/cards/CardList.svelte';
-	import FormattedDate from '../../../components/FormattedDate.svelte';
-	import LineGraph from '../../../components/graphics/LineGraph.svelte';
+	import CardList from '$components/cards/CardList.svelte';
+	import FormattedDate from '$components/FormattedDate.svelte';
+	import LineGraph from '$components/graphics/LineGraph.svelte';
 
 	interface PageData {
 		format: FormatDetail;

@@ -3,7 +3,7 @@
 	import type { FormatBans } from '$lib/models/Card';
 	import { convertDate, formatDateString } from '$lib/utils/date';
 	import Format from './components/Format.svelte';
-	import PageTitle from '../../components/layout/PageTitle.svelte';
+	import PageTitle from '$components/layout/PageTitle.svelte';
 	import TimeMachine from './components/TimeMachine.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import { onMount } from 'svelte';
