@@ -11,7 +11,7 @@
 	const hasBan = format.limitations.length;
 </script>
 
-<h2>{format.format}</h2>
+<h2><a href="/formats/{format.slug}">{format.format}</a></h2>
 
 {#each format.limitations as limitation}
 	<h3>{limitation.status} ({limitation.cards.length})</h3>

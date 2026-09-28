@@ -13,7 +13,7 @@
 	<tbody>
 		{#each statuses as status}
 			<tr>
-				<th>{status.format}</th>
+				<th><a href="/formats/{status.slug}">{status.format}</a></th>
 				<td>
 					{#if status.type === 'Limitation'}
 						<span class={status.color}>{status.status}</span> since <FormattedDate
