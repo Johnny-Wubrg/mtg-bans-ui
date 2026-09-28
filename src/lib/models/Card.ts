@@ -32,6 +32,7 @@ export type CardFormatStatusType =
 
 export interface CardFormatStatus {
 	format: string;
+	slug: string;
 	type: CardFormatStatusType;
 	status: string | null;
 	color: GraphColor | null;
@@ -48,6 +49,7 @@ export interface CardLegalityEvent {
 
 export interface FormatBans {
 	format: string;
+	slug: string;
 	limitations: FormatBansLimitation[];
 }
 
